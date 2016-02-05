@@ -1,0 +1,32 @@
+label.col-sm-2.control-label{
+    text-align: left;
+}
+
+a.btn.btn-default.btn-block{
+    border-color:rgba(0, 0, 0, 0.75);
+    border-width:2px;
+}
+p.users{
+    font-size:20px
+}
+
+.glyphicon.glyphicon-plus{
+    font-size:25px;
+    color:#1C6DB3;
+
+}
+.glyphicon.glyphicon-ok{
+    font-size:25px;
+    color: #5D9A5E;
+}
+
+.glyphicon.glyphicon-pencil{
+    font-size:25px;
+    color:#A756A7;
+
+
+}
+.glyphicon.glyphicon-remove{
+    font-size:25px;
+    color: #E2514E;
+}
