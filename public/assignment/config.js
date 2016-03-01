@@ -33,7 +33,7 @@
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
-                controller: "FormFieldsController"
+                controller: "FormController"
 
             })
             .otherwise({
