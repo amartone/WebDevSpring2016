@@ -12,16 +12,16 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <!--Angular-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.2/angular.js"></script>
-    <!--<script src="js/http_cdnjs.cloudflare.com_ajax_libs_angular.js_1.5.0-rc.2_angular.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.2/angular-route.js"></script>
-    <!--<script src="js/http_cdnjs.cloudflare.com_ajax_libs_angular.js_1.5.0-rc.2_angular-route.js" ></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.2/angular.js"></script>-->
+    <script src="js/http_cdnjs.cloudflare.com_ajax_libs_angular.js_1.5.0-rc.2_angular.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.2/angular-route.js"></script>-->
+    <script src="js/http_cdnjs.cloudflare.com_ajax_libs_angular.js_1.5.0-rc.2_angular-route.js" ></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <script src="services/form.service.client.js"></script>
+    <script src="services/issue.service.client.js"></script>
     <script src="services/user.service.client.js"></script>
     <script src="views/home/home.controller.js"></script>
     <script src="views/users/profile.controller.js"></script>
@@ -43,15 +43,13 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<div ng-include src="'views/sidebar/sidebar.view.html'"></div>
-<div ng-include src="'views/header/header.view.html'"></div>
 
 <body ng-controller="MainController">
-<div class="container-fluid">
+<div ng-include src="'views/header/header.view.html'"></div>
+<div ng-include src="'views/sidebar/sidebar.view.html'"></div>
 <div class="container">
     <div ng-view></div>
 </div>
-    </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

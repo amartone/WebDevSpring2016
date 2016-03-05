@@ -9,15 +9,15 @@
     function UserService($rootScope) {
         var model = {
             users: [
-                {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                    "username":"alice",  "password":"alice",   "roles": ["student"]		},
-                {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
+                {	"_id":0, "firstName":"Andrew",            "lastName":"Martone",
+                    "username":"andrew.m",  "password":"andrew.m",   "roles": ["Roommate"]		},
+                {	"_id":1, "firstName":"Bob",              "lastName":"Hope",
                     "username":"bob",    "password":"bob",     "roles": ["admin"]		},
-                {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
+                {	"_id":2, "firstName":"Charlie",          "lastName":"Brown",
                     "username":"charlie","password":"charlie", "roles": ["faculty"]		},
-                {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
+                {	"_id":3, "firstName":"Dan",              "lastName":"Craig",
                     "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
-                {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
+                {	"_id":4, "firstName":"Edward",           "lastName":"Norton",
                     "username":"ed",     "password":"ed",      "roles": ["student"]		}
             ]
             ,
