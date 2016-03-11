@@ -3,16 +3,16 @@
  */
 (function() {
     angular
-        .module("FormBuilderApp")
-        .factory("FormService", FormService);
+        .module("ProjectIssuesApp")
+        .factory("IssueService", IssueService);
 
-    function FormService() {
+    function IssueService() {
         var model = {
             issues: [
-                {"_id": "000", "title": "Do the dishes", "priority": "high", "description": "put a description here", "assigned": [0, 1], "image": 0, "userId": 0},
-                {"_id": "001", "title": "Take out the trash", "priority": "very high", "description": "put a description here", "assigned": [0, 1], "image": 1,"userId": 1},
-                {"_id": "002", "title": "Clean my room", "priority": "medium", "description": "put a description here", "assigned": [0,1], "image": 2,"userId": 0},
-                {"_id": "003", "title": "Buy groceries", "priority": "low", "description": "put a description here", "assigned": [0], "image": 3, "userId": 0}
+                {"_id": "000", "title": "Do the dishes", "priority": "high", "description": "put a description here", "assignee": "Andrew", "image": 0, "userId": 0},
+                {"_id": "001", "title": "Take out the trash", "priority": "very high", "description": "put a description here", "assignee": "Brian", "image": 1,"userId": 1},
+                {"_id": "002", "title": "Clean my room", "priority": "medium", "description": "put a description here", "assignee": "Andrew", "image": 2,"userId": 0},
+                {"_id": "003", "title": "Buy groceries", "priority": "low", "description": "put a description here", "assignee": "Andrew", "image": 3, "userId": 0}
             ]
             ,
             images: [
@@ -29,13 +29,13 @@
         };
         return model;
 
-        function createIssueForUser(userId, issueForm, callback) {
+        function createIssueForUser(userId, issue, callback) {
             var issue = {
                 _id: (new Date).getTime(),
-                title: issueForm.title,
-                priority: issueForm.priority,
-                assigned: issueForm.assigned,
-                image: issueForm.image,
+                title: issue.title,
+                priority: issue.priority,
+                assignee: issue.assignee,
+                image: issue.image,
                 userId: userId
 
             };
@@ -54,24 +54,25 @@
 
         }
 
-        function deleteIssueById(issueFormId, callback) {
-            for (var form in model.forms) {
-                if (model.issues[form]._id === issueFormId) {
-                    model.issues.splice(form, 1);
+        function deleteIssueById(issueId, callback) {
+            for (var issue in model.issues) {
+                if (model.issues[issue]._id === issueId) {
+                    model.issues.splice(issue, 1);
                 }
+                console.log(issueId)
                 callback(model.issues);
             }
         }
 
-        function updateIssueById(issueFormId, newIssuesForm, callback) {
+        function updateIssueById(issueId, newIssue, callback) {
             for (var issue in model.issues) {
 
-                if (model.issues[issue]._id === issueFormId) {
-                    model.issues[issue].title = newIssuesForm.title;
-                    model.issues[issue].priority = newIssuesForm.priority;
-                    model.issues[issue].description = newIssuesForm.description;
-                    model.issues[issue].assigned = newIssuesForm.assigned;
-                    model.issues[issue].image = newIssuesForm.image;
+                if (model.issues[issue]._id === issueId) {
+                    model.issues[issue].title = newIssue.title;
+                    model.issues[issue].priority = newIssue.priority;
+                    model.issues[issue].description = newIssue.description;
+                    model.issues[issue].assigned = newIssue.assigned;
+                    model.issues[issue].image = newIssue.image;
                     callback(model.issues[issue]);
                 }
             }

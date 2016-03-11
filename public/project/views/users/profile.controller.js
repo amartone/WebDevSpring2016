@@ -3,14 +3,14 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectIssuesApp")
         .controller("ProfileController", ProfileController);
 
     function ProfileController($rootScope, $scope, UserService) {
 
         $scope.update = update;
         $scope.user = $rootScope.currentUser;
-
+        $scope.picture = $rootScope.currentUser.photo;
         function update(user) {
 
             var callback = function(response){

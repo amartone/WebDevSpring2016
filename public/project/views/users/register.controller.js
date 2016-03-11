@@ -3,7 +3,7 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectIssuesApp")
         .controller("RegisterController", RegisterController);
 
     function RegisterController(UserService, $location, $scope, $rootScope) {

@@ -1,0 +1,69 @@
+<div class="container-fluid" ng-controller="RoomController">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Admin</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#/issues">Issues</a></li>
+                <li role="presentation"><a href="#/users">Users</a></li>
+                <li role="presentation" class="active"><a href="#/rooms">Rooms</a></li>
+            </ul>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Room Name
+                    </th>
+
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Issues
+                    </th>
+
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Creator
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Action
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input ng-model="room.name" type="text" class="form-control" placeholder="Issue Name">
+                    </td>
+                    <td>
+                        <input ng-model="room.issues" type="text" class="form-control" placeholder="Priority">
+                    </td>
+                    <td>
+                        <input ng-model="room.creator" type="text" class="form-control" placeholder="Description">
+                    </td>
+                    <td class="action">
+                        <div class="btn-group">
+                        <button ng-click="addRoom(room)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button ng-click="updateRoom(room)" class="btn btn-success"><span class="glyphicon glyphicon-ok "></span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr ng-repeat="i in rooms">
+                    <td>{{i.name}}</td>
+                    <td>{{i.issues}}</td>
+                    <td>{{i.creator}}</td>
+                    <td>
+                        <div class="btn-group">
+                        <button ng-click="deleteRoom(i)" class="btn btn-danger"><span class="glyphicon glyphicon-glyphicon glyphicon-remove"></span></button>
+                        <button ng-click="selectRoom($index)" class="btn btn-warning"><span class=" glyphicon glyphicon-pencil"></span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

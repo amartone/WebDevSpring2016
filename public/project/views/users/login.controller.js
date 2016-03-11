@@ -6,7 +6,7 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectIssuesApp")
         .controller("LoginController", LoginController);
 
     function LoginController(UserService, $location, $scope, $rootScope) {

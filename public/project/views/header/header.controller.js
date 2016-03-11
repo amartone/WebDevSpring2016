@@ -3,7 +3,7 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectIssuesApp")
         .controller("HeaderController", HeaderController);
 
     function HeaderController(UserService, $location, $scope) {

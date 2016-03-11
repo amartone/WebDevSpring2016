@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Profile</h1>
+            <div class="user" style="background-image:url({{currentUser.photo}})"></div>
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">Username</label>
@@ -40,9 +41,9 @@
 
                     <div class="col-sm-10">
                         <select ng-model="user.role" class="form-control" id="role">
-                            <option>student</option>
-                            <option>admin</option>
-                            <option>faculty</option>
+                            <option>Roommate</option>
+                            <option>Owner</option>
+                            <option>Employee</option>
                         </select>
                     </div>
                 </div>

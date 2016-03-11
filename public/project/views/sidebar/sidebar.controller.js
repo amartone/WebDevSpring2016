@@ -3,7 +3,7 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectIssuesApp")
         .controller("SidebarController", SidebarController);
 
     function SidebarController($location, $scope) {

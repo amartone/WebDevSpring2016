@@ -1,0 +1,85 @@
+<div class="container-fluid" ng-controller="UserController">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Admin</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#/issues">Issues</a></li>
+                <li role="presentation" class="active"><a href="#/users">Users</a></li>
+                <li role="presentation"><a href="#/rooms">Rooms</a></li>
+
+            </ul>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        ID
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        First Name
+                    </th>
+
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Last Name
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Username
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Roles
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Action
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input ng-model="user._id" type="text" class="form-control" placeholder="ID">
+                    </td>
+                    <td>
+                        <input ng-model="user.firstName" type="text" class="form-control" placeholder="First Name">
+                    </td>
+                    <td>
+                        <input ng-model="user.lastName" type="text" class="form-control" placeholder="Last Name">
+                    </td>
+                    <td>
+                        <input ng-model="user.username" type="text" class="form-control" placeholder="Username">
+                    </td>
+                    <td>
+                        <input ng-model="user.roles" type="text" class="form-control" placeholder="Roles">
+                    </td>
+                    <td class="action">
+                        <div class="btn-group">
+                            <button ng-click="addUser(user)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button ng-click="updateUser(user)" class="btn btn-success"><span class="glyphicon glyphicon-ok "></span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr ng-repeat="i in users">
+                    <td>{{i._id}}</td>
+                    <td>{{i.firstName}}</td>
+                    <td>{{i.lastName}}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.roles}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button ng-click="deleteUser(i)" class="btn btn-danger"><span class="glyphicon glyphicon-glyphicon glyphicon-remove"></span></button>
+                            <button ng-click="selectUser($index)" class="btn btn-warning"><span class=" glyphicon glyphicon-pencil"></span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -3,11 +3,10 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectIssuesApp")
         .controller("HomeController", HomeController);
 
     function HomeController () {
 
     }
-
 })();

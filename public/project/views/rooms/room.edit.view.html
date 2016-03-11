@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Edit Room</h1>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="username" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Andrew's Apartment">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="issues" class="col-sm-2 control-label">Issues</label>
+                    <div class="col-sm-10">
+                    <div class="list-group" id="issues">
+                        <button type="button" class="list-group-item">Clean room</button>
+                        <button type="button" class="list-group-item">Take out trash</button>
+                        <button type="button" class="list-group-item">Organize room</button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="people" class="col-sm-2 control-label">People</label>
+                    <div class="col-sm-10">
+                        <div class="checkbox" id="people">
+                            <label>
+                                <input type="checkbox" value="">
+                                Andrew
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                Josh
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                Adam
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="uploadImage" class="col-sm-2 control-label">Upload new image</label>
+                    <div class="col-sm-10" id="uploadImage">
+                        <img src="img/room.jpg" class="img-responsive img-room">
+
+                        <button type="button" class="btn btn-info">Select image</button>
+
+                    </div>
+                </div>
+
+                <!--<div class="form-group">-->
+                <!--<label for="inputEmail" class="col-sm-2 control-label">Email</label>-->
+                <!--<div class="col-sm-10">-->
+                <!--<input type="text" class="form-control" id="inputEmail" placeholder="Email">-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button ng-click="update(user)" class="btn btn-primary btn-block"> Update room</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
