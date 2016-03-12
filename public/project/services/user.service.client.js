@@ -10,7 +10,7 @@
         var model = {
             users: [
                 {	"_id":0, "firstName":"Andrew",            "lastName":"Martone",
-                    "username":"andrew.m",  "password":"andrew.m",   "roles": ["Roommate", "admin"], "photo": "img/_linkedin.jpg"},
+                    "username":"andrew.m",  "password":"andrew.m",   "roles": ["Roommate", "admin"], "photo": "img/linkedin.jpg"},
                 {	"_id":1, "firstName":"Bob",              "lastName":"Hope",
                     "username":"bob",    "password":"bob",     "roles": ["Home Owner"], "photo": "img/linkedin.jpg"		},
                 {	"_id":2, "firstName":"Charlie",          "lastName":"Brown",
