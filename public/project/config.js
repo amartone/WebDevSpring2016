@@ -46,6 +46,9 @@
             .when("/createissue", {
                 templateUrl: "views/issues/create.issue.view.html"
             })
+            .when("/createroom", {
+                templateUrl: "views/rooms/create.room.view.html"
+            })
             .when("/editissue", {
                 templateUrl: "views/issues/edit.issue.view.html"
             })
