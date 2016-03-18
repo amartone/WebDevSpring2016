@@ -5,7 +5,7 @@ module.exports = function(app, formModel, userModel) {
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user/:id", findUserById);
     app.put("/api/assignment/user/:id", updateUser);
-    app.get("/api/assignment/user?username=username", findUserByUsername);
+    //app.get("/api/assignment/user?username=username", findUserByUsername);
     app.get("/api/assignment/user", userRouter);
     app.delete("/api/assignment/user/:id", deleteUser);
     app.post("/api/assignment/logout", logout);

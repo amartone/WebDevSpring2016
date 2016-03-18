@@ -38,7 +38,7 @@ module.exports = function () {
 
     function findUserById(userId){
         for(u in mock){
-            if(mock[u]._id === userid){
+            if(mock[u]._id === userId){
                 return mock[u];
             }
         }

@@ -20,6 +20,6 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 //require("./public/experiments/project/omdb/server/app.js")(app);
 require("./public/assignment/server/app.js")(app);
-require("./public/experiments/hombach/server/app.js")(app);
+//require("./public/experiments/hombach/server/app.js")(app);
 
 app.listen(port, ipaddress);
