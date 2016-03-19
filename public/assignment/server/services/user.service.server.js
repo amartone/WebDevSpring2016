@@ -1,41 +1,38 @@
 /**
  * Created by Andrew on 3/15/16.
  */
-module.exports = function(app, formModel, userModel) {
+module.exports = function (app, formModel, userModel) {
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user/:id", findUserById);
-    app.put("/api/assignment/user/:id", updateUser);
+    app.put("/api/assignment/user/:id", routeUser);
     //app.get("/api/assignment/user?username=username", findUserByUsername);
-    app.get("/api/assignment/user", userRouter);
+    app.get("/api/assignment/user", apiRouter);
     app.delete("/api/assignment/user/:id", deleteUser);
     app.post("/api/assignment/logout", logout);
 
 
-
-    function userRouter(req, res) {
+    function apiRouter(req, res) {
         if (req.query.username && req.query.password) {
             console.log("made");
             findUserByCredentials(req, res);
         }
-        else if (req.query.username){
+        else if (req.query.username) {
             findUserByUsername(req, res);
 
-        }else{
+        } else {
             findAllUsers(req, res);
         }
 
     }
 
-    function updateUser(req, res){
+    function updateUser(req, res) {
         var userId = req.params.id;
-        console.log("the id is..." + userId);
         var user = req.body;
         res.json(userModel.updateUser(userId, user));
         console.log("Successfully updated user: " + user.username);
     }
 
-    function register(req, res){
-        console.log("here");
+    function register(req, res) {
         var user = req.body;
         user = userModel.createUser(user);
         req.session.currentUser = user;
@@ -43,7 +40,7 @@ module.exports = function(app, formModel, userModel) {
         console.log("Sucessfully registered user: " + user.username);
     }
 
-    function findAllUsers(req, res){
+    function findAllUsers(req, res) {
         var users = userModel.findAllUsers();
         res.json(users);
     }
@@ -54,14 +51,13 @@ module.exports = function(app, formModel, userModel) {
         res.json(user);
     }
 
-    function findUserByUsername(req, res){
+    function findUserByUsername(req, res) {
         var username = req.params.username;
         var user = userModel.findByUsername(username);
         res.json(user);
     }
 
-    function findUserByCredentials(req, res){
-        console.log("in function");
+    function findUserByCredentials(req, res) {
         var user = req.query.username;
         var password = req.query.password;
         console.log(user);
@@ -69,13 +65,13 @@ module.exports = function(app, formModel, userModel) {
         res.json(userName);
     }
 
-    function deleteUser(req, res){
+    function deleteUser(req, res) {
         var userId = req.params.id;
         userModel.deleteUser(userId);
         res.send(200);
     }
 
-    function logout(req, res){
+    function logout(req, res) {
         userModel.setCurrentUser(null);
     }
 

@@ -45,7 +45,6 @@
                     if(response.data){
                         console.log(response.data);
                         delete vm.form;
-
                         //vm.forms = response.data;
                         //showForms();
                     }

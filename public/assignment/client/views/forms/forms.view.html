@@ -4,7 +4,7 @@
             <h1 class="page-header">Forms</h1>
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a href="#">Forms</a></li>
-                <li role="presentation"><a href="field.view.html">Fields</a></li>
+                <li role="presentation"><a href="#/fields">Fields</a></li>
             </ul>
             <table class="table table-bordered table-striped table-responsive">
                 <thead>
@@ -32,7 +32,7 @@
                 </tr>
 
                 <tr ng-repeat="f in model.forms">
-                    <td>{{f.title}}</td>
+                    <td><a href="#/form/{{f._id}}/fields">{{f.title}}</a></td>
                     <td>
                         <button ng-click="model.deleteForm($index)" class="btn btn-danger"><span class="glyphicon glyphicon-glyphicon glyphicon-remove"></span></button>
                         <button ng-click="model.selectForm($index)" class="btn btn-warning"><span class=" glyphicon glyphicon-pencil"></span></button>

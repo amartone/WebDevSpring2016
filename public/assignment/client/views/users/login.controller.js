@@ -4,7 +4,7 @@
 /**
  * Created by Andrew on 2/23/16.
  */
-(function(){
+(function () {
     angular
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
@@ -15,10 +15,11 @@
 
         function init() {
         }
+
         init();
 
         function findUserByCredentials(user, pass) {
-            if(!user) {
+            if (!user) {
                 return;
             }
             UserService
@@ -26,8 +27,8 @@
                     user,
                     pass
                 )
-                .then(function(response){
-                    if(response.data) {
+                .then(function (response) {
+                    if (response.data) {
                         UserService.setCurrentUser(response.data);
                         $location.url("/profile");
                     }
