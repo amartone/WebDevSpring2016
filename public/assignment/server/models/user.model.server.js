@@ -16,13 +16,13 @@ module.exports = function () {
     };
     return api;
 
-    function createUser(user){
+    function createUser(user) {
         user._id = "ID_" + (new Date()).getTime();
         mock.push(user);
         return user;
     }
 
-    function updateUser(userId, user){
+    function updateUser(userId, user) {
         console.log(userId);
         for (var u in mock) {
             if (mock[u]._id == userId) {
@@ -36,30 +36,30 @@ module.exports = function () {
         }
     }
 
-    function findUserById(userId){
-        for(u in mock){
-            if(mock[u]._id === userId){
+    function findUserById(userId) {
+        for (u in mock) {
+            if (mock[u]._id === userId) {
                 return mock[u];
             }
         }
         return null;
     }
 
-    function deleteUser(userId){
-        for (var u in mock){
-            if (mock[u]._id === userId){
+    function deleteUser(userId) {
+        for (var u in mock) {
+            if (mock[u]._id === userId) {
                 mock.splice(userId, 1);
             }
         }
     }
 
-    function findAllUsers(){
-            return mock;
+    function findAllUsers() {
+        return mock;
     }
 
-    function findUserByUsername(username){
-        for(u in mock){
-            if(mock[u].username === username){
+    function findUserByUsername(username) {
+        for (u in mock) {
+            if (mock[u].username === username) {
                 return mock[u];
             }
         }
@@ -67,9 +67,9 @@ module.exports = function () {
     }
 
     function findUserByCredentials(username, password) {
-        for(u in mock){
-            if(mock[u].username == username &&
-               mock[u].password == password){
+        for (u in mock) {
+            if (mock[u].username == username &&
+                mock[u].password == password) {
                 return mock[u];
             }
         }
