@@ -20,7 +20,7 @@ module.exports = function () {
     function createFormForUser(form, userId) {
         form._id = "ID_" + (new Date()).getTime();
         form.userId = userId;
-
+        form.fields = [];
         mock.push(form);
         return form;
     }
@@ -43,10 +43,7 @@ module.exports = function () {
         console.log(formId);
         for (var u in mock) {
             if (mock[u]._id == formId) {
-                mock[u].username = form.username;
-                mock[u].firstName = form.firstName;
-                mock[u].lastName = form.lastName;
-                mock[u].password = form.password;
+                mock[u].title = form.title;
                 return mock[u];
             }
         }
