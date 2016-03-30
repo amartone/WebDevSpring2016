@@ -1,0 +1,19 @@
+<div class="col-sm-offset-3" ng-controller="IssueController">
+    <h1>Issue Details</h1>
+    <div class="row">
+        <div class="col-xs-9">
+            <img src={{model.issue.image}} class="img-responsive">
+            <h3> <span class="glyphicon glyphicon-pencil"></span> Name: {{model.issue.title}}</h3>
+            <h3> <span class="glyphicon glyphicon-list-alt"></span> Notes: </h3>
+            <div class="well">{{model.issue.description}}</div>
+
+            <h3> <span class="glyphicon glyphicon-warning-sign"></span> Priority:  <span class="label label-danger">{{model.issue.priority}}</span></h3>
+
+
+            <h3> <span class="glyphicon glyphicon-user"></span> Assignee: <div class="user" style="background-image:url('img/linkedin.jpg')"></div>
+                {{model.issue.assignee}}
+            </h3>
+
+        </div>
+    </div>
+</div>

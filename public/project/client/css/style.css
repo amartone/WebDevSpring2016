@@ -1,0 +1,48 @@
+label.col-sm-2.control-label{
+    text-align: left;
+}
+
+a.btn.btn-default.btn-block{
+    border-color:rgba(0, 0, 0, 0.75);
+    border-width:2px;
+}
+p.users{
+    font-size:20px
+}
+
+
+.glyphicon-align-justify{
+    font-size:25px;
+
+
+}
+
+
+
+.user {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.room{
+    background-image:url("../img/room.jpg")
+}
+.img-room{
+    max-height:300px;
+}
+
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 75%;
+    padding-top: 8px;
+}
+
+
+

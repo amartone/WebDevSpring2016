@@ -1,0 +1,6 @@
+[
+{"_id": "000", "title": "Do the dishes", "priority": "High", "description": "put a description here", "assignee": "Andrew", "image": "./img/dishes.jpg", "userId": 0},
+{"_id": "001", "title": "Take out the trash", "priority": "High", "description": "put a description here", "assignee": "Brian", "image": "./img/takeouttrash.jpg","userId": 1},
+{"_id": "002", "title": "Clean my room", "priority": "Medium", "description": "put a description here", "assignee": "Andrew", "image": "./img/messyroom.jpg","userId": 0},
+{"_id": "003", "title": "Buy groceries", "priority": "Low", "description": "put a description here", "assignee": "Andrew", "image": "./img/groceries.jpg", "userId": 0}
+]

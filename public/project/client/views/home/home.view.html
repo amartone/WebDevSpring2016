@@ -1,0 +1,102 @@
+<div class="col-sm-offset-3 col-sm-9" ng-controller="HomeController">
+    <h1>Roomr</h1>
+    <div class="row">
+        <div class="col-sm-6">
+        <h3> <span class="glyphicon glyphicon-home"></span> Rooms: 3</h3>
+        <h3> <span class="glyphicon glyphicon-bell"></span> Issues created: {{model.issues.length}}</h3>
+        </div>
+    </div>
+    <div class="col-sm-6">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="user" style="background-image:url('img/linkedin.jpg')"></div>
+                    <h3>Andrew's Apartment</h3>
+                    <p> <span class="glyphicon glyphicon-user"></span> People: 3</p>
+                    <p> <span class="glyphicon glyphicon-bell"></span> Issues: 3</p>
+                    <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="user" style="background-image:url('img/office.jpg')"></div>
+                    <h3>Andrew's Office</h3>
+                    <p> <span class="glyphicon glyphicon-user"></span> People: 3</p>
+                    <p> <span class="glyphicon glyphicon-bell"></span> Issues: 3</p>
+                    <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div class="user" style="background-image:url('img/adam.jpg')"></div>
+                    <h3>Adam's Hotel Room</h3>
+                    <p> <span class="glyphicon glyphicon-user"></span> People: 3</p>
+                    <p> <span class="glyphicon glyphicon-bell"></span> Issues: 3</p>
+                    <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</div>
+
+<div class="col-sm-6">
+    <div class="row" ng-repeat="i in model.issues">
+        <div class="col-xs-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title pull-left"> {{i.title}}</h3>
+                <div class="btn-group pull-right" role="group" aria-label="...">
+                <a href="#/issuedetails/{{i._id}}/" class="btn btn-success " role="button">View</a>
+                <a href="#/editissue/{{i._id}}" class="btn btn-warning" role="button">Edit</a>
+               </div>
+                <div class="clearfix"></div>
+                </div>
+            <div class="panel-body">
+                Created on: 3-11-2016 for Andrew's Apartment
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left"> Clean room</h3>
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                    <a href="#/issuedetails" class="btn btn-success pull-right" role="button">View</a>
+                    <a href="#/editissue" class="btn btn-warning pull-right" role="button">Edit</a>
+</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body">
+                    Created on: 3-11-2016 for Andrew's Office
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title pull-left"> Organize room</h3>
+                    <div class="btn-group pull-right" role="group" aria-label="...">
+                    <a href="#/issuedetails" class="btn btn-success pull-right" role="button">View</a>
+                    <a href="#/editissue" class="btn btn-warning pull-right" role="button">Edit</a>
+</div>
+                    <div class="clearfix"></div>
+                    </div>
+                <div class="panel-body">
+                    Created on: 3-11-2016 for Adam's Hotel Room
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+</div>

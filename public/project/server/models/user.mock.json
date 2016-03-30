@@ -1,0 +1,9 @@
+[
+  {"_id": 0, "firstName": "Andrew", 	"lastName": "Martone",	"username": "andrew", 	"password": "andrew", "role": ["Owner", "admin"], "photo": "./img/linkedin.jpg"},
+  {"_id": 123, "firstName": "Alice", 	"lastName": "Wonderland",	"username": "alice", 	"password": "alice", "role": "Roomate"},
+  {"_id": 234, "firstName": "Bob",	"lastName": "Hope", 		"username": "bob", 	"password": "bob", "role": "Owner", "photo": "./img/linkedin.jpg"},
+  {"_id": 345, "firstName": "Charlie","lastName": "Brown", 		"username": "charlie", "password": "charlie", "role": "Owner", "photo": "./img/linkedin.jpg"},
+  {"_id": 456, "firstName": "Dan",	"lastName": "Craig", 		"username": "dan", 	"password": "dan", "role": "Owner", "photo": "./img/linkedin.jpg"},
+  {"_id": 567, "firstName": "Edward","lastName": "Norton",		"username": "ed",	"password": "ed", "role": "Owner", "photo": "./img/linkedin.jpg"}
+
+]

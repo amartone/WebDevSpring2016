@@ -1,0 +1,6 @@
+[
+  {"_id": "0", "name": "Andrew's Room", "issues": "1", "creator": "Andrew",  "userId": 0},
+  {"_id": "0", "name": "Office", "issues": "3", "creator": "Brian", "userId": 1},
+  {"_id": "0", "name": "Hotel room", "issues": "2", "creator": "Adam","userId": 0},
+  {"_id": "0", "name": "Office", "issues": "4", "creator": "Josh", "image": 3, "userId": 0}
+]
