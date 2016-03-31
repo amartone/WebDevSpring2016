@@ -9,7 +9,14 @@ module.exports = function (app, formModel, userModel) {
     app.get("/api/assignment/user", apiRouter);
     app.delete("/api/assignment/user/:id", deleteUser);
     app.post("/api/assignment/logout", logout);
+    app.get("/api/assignment/loggedin", loggedIn);
 
+
+    function loggedIn(req, res){
+        console.log("testdsfsddsf");
+        console.log(req.session.currentUser);
+        res.json(req.session.currentUser);
+    }
 
     function apiRouter(req, res) {
         if (req.query.username && req.query.password) {
@@ -33,11 +40,21 @@ module.exports = function (app, formModel, userModel) {
 
     function register(req, res) {
         var user = req.body;
-        user = userModel.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
-        console.log("Sucessfully registered user: " + user.username);
+        user = userModel.createUser(user)
+            // handle model promise
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    req.session.currentUser = doc;
+                    res.json(user);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
+
 
     function findAllUsers(req, res) {
         var users = userModel.findAllUsers();
@@ -45,9 +62,24 @@ module.exports = function (app, formModel, userModel) {
     }
 
     function findUserById(req, res) {
-        var userId = req.params.id;
-        var user = userModel.findUserById(userId);
-        res.json(user);
+        var userId = req.params.userId;
+
+        // use model to find user by id
+        var user = userModel.findUserById(userId)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    //we'll work on movie model a bit later
+                    //var movieImdbIDs = user.likes;
+                    //var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
+                    //user.likesMovies = movies;
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUserByUsername(req, res) {
@@ -57,11 +89,20 @@ module.exports = function (app, formModel, userModel) {
     }
 
     function findUserByCredentials(req, res) {
-        var user = req.query.username;
+        var username = req.query.username;
         var password = req.query.password;
-        console.log(user);
-        var userName = userModel.findUserByCredentials(user, password);
-        res.json(userName);
+
+        var user = userModel.findUserByCredentials(username, password)
+            .then(
+                function (doc) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteUser(req, res) {
@@ -74,14 +115,4 @@ module.exports = function (app, formModel, userModel) {
         userModel.setCurrentUser(null);
     }
 
-    function login(req, res) {
-        var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentials);
-        req.session.currentUser = user;
-        res.json(user);
-    }
-
-    function loggedin(req, res) {
-        res.json(req.session.currentUser);
-    }
 }

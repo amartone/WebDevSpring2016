@@ -16,7 +16,6 @@
         vm.confirmEdit = confirmEdit;
         vm.deleteField = deleteField;
         vm.addField = addField;
-        vm.test = "hey";
 
         vm.options =
             [

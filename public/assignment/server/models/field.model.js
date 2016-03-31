@@ -2,7 +2,14 @@
  * Created by Andrew on 3/18/16.
  */
 var forms = require("./form.mock.json");
-module.exports = function (uuid, formModel) {
+module.exports = function (uuid, formModel, db, mongoose) {
+
+
+    var FieldSchema = require("./field.schema.server.js")(mongoose);
+
+    // create user model from schema
+    var FieldModel = mongoose.model('Field', FieldSchema);
+
     var api = {
         createField: createField,
         findFieldByFieldId: findFieldByFieldId,

@@ -21,30 +21,46 @@
                 templateUrl: "views/users/login.view.html",
                 controller: "LoginController",
                 controllerAs: "model"
+
             })
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
-                controller: "FormFieldsController"
+                controller: "FormFieldsController",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
                 controller: "FormController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/fields", {
                 templateUrl: "views/forms/field.view.html",
                 controller: "FieldController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/field.view.html",
                 controller: "FieldController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .otherwise({
                 redirectTo: "/home"
@@ -68,8 +84,7 @@
 
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
+        UserService.getCurrentUser()
             .then(function(response) {
                 var currentUser = response.data;
                 if(currentUser) {

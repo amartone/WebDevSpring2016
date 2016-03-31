@@ -14,10 +14,15 @@
             logout: logout,
             updateUser: updateUser,
             getLoggedIn: getLoggedIn,
-            findUserById: findUserById
+            findUserById: findUserById,
+            getCurrentUser: getCurrentUser
         };
 
         return api;
+
+        function getCurrentUser(){
+            return $http.get("/api/assignment/loggedin");
+        }
 
         function updateUser(userId, user){
             return $http.put("/api/assignment/user/" + userId, user);
@@ -44,7 +49,6 @@
         }
 
         function getLoggedIn(){
-
             return $rootScope.currentUser;
         }
 
