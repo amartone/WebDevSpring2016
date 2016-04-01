@@ -29,7 +29,6 @@
         }
 
         function register(user) {
-            console.log(user.lastName);
             return $http.post("/api/assignment/user", user);
         }
 
@@ -38,17 +37,16 @@
         }
 
         function setCurrentUser(user) {
-            console.log("Setting current user to: " + user.username);
+            console.log("Seting current user to:" + user.username);
             $rootScope.currentUser = user;
         }
 
         function findUserByCredentials(username, password) {
-            console.log(username);
-            console.log(password);
             return $http.get("/api/assignment/user?username=" + username + "&password=" + password);
         }
 
         function getLoggedIn(){
+            console.log("Getting logged in user:" + $rootScope.currentUser.username);
             return $rootScope.currentUser;
         }
 

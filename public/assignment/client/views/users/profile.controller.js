@@ -12,7 +12,10 @@
         vm.update = update;
 
         function init() {
-            vm.user = UserService.getLoggedIn();
+            UserService.getCurrentUser()
+                .then(function(response){
+                    vm.user=response.data;
+                });
         }
 
         init();
@@ -23,10 +26,11 @@
             UserService
                 .updateUser(user._id, user)
                 .then(function (response) {
-                    console.log(response.data);
-                    UserService.setCurrentUser(response.data);
-                    $location.url("/profile")
-
+                    var currentUser = response.data;
+                    if(currentUser){
+                        UserService.setCurrentUser(currentUser);
+                        $location.url("/profile");
+                    }
                 });
         }
     }

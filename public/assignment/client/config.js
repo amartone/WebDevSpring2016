@@ -27,9 +27,10 @@
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",
                 controllerAs: "model",
-                resolve: {
+                resolve:{
                     checkLoggedIn: checkLoggedIn
                 }
+
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",

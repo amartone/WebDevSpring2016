@@ -13,10 +13,11 @@ module.exports = function (app, formModel, userModel) {
 
 
     function loggedIn(req, res){
-        console.log("testdsfsddsf");
         console.log(req.session.currentUser);
         res.json(req.session.currentUser);
     }
+
+
 
     function apiRouter(req, res) {
         if (req.query.username && req.query.password) {
@@ -34,8 +35,18 @@ module.exports = function (app, formModel, userModel) {
     function updateUser(req, res) {
         var userId = req.params.id;
         var user = req.body;
-        res.json(userModel.updateUser(userId, user));
-        console.log("Successfully updated user: " + user.username);
+
+        user = userModel.updateUser(userId, user)
+            .then(function(doc){
+                    req.session.currentUser = doc;
+                    res.json(doc);
+            },
+                function(err){
+                    res.status(400).send(err);
+                }
+
+            );
+
     }
 
     function register(req, res) {
@@ -46,7 +57,7 @@ module.exports = function (app, formModel, userModel) {
                 // login user if promise resolved
                 function ( doc ) {
                     req.session.currentUser = doc;
-                    res.json(user);
+                    res.json(doc);
                 },
                 // send error if promise rejected
                 function ( err ) {

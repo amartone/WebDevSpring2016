@@ -10,7 +10,19 @@ module.exports = function (app, formModel) {
 
     function getFormsForUser(req, res) {
         var userId = req.params.userId;
-        res.json(formModel.findFormsByUserId(userId));
+
+        userId = formModel.findFormsByUserId(userId)
+            .then(
+                function ( doc ) {
+                    console.log("Form found...." + doc);
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
+
     }
 
     function getFormById(req, res) {
@@ -20,19 +32,51 @@ module.exports = function (app, formModel) {
 
     function deleteForm(req, res) {
         var formId = req.params.formId;
-        formModel.deleteForm(formId);
-        res.send(200);
+
+        formId = formModel.deleteForm(formId)
+            .then(
+                function ( doc ) {
+                    console.log("Form deleted...." + doc);
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(200).send(err);
+                }
+            );
     }
 
     function createFormForUser(req, res) {
         var userId = req.params.userId;
         var form = req.body;
-        res.json(formModel.createFormForUser(form, userId));
+
+        form = formModel.createFormForUser(form, userId)
+            .then(
+                function ( doc ) {
+                    console.log("Form created...." + doc);
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateForm(req, res) {
         var formId = req.params.formId;
         var form = req.body;
-        res.json(formModel.updateForm(formId, form));
+
+        form = formModel.updateForm(formId, form)
+            .then(
+                function ( doc ) {
+                    console.log("Form updated...." + doc);
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 };

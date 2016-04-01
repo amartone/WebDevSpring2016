@@ -43,17 +43,21 @@ module.exports = function (db, mongoose) {
     }
 
     function updateUser(userId, user) {
-        console.log(userId);
-        for (var u in mock) {
-            if (mock[u]._id == userId) {
-                mock[u].username = user.username;
-                mock[u].firstName = user.firstName;
-                mock[u].lastName = user.lastName;
-                mock[u].password = user.password;
-                console.log("update user..." + mock[u]);
-                return mock[u];
+
+        var deferred = q.defer();
+
+        UserModel.findOneAndUpdate({_id: userId}, user, {new:true}, function(err, doc){
+            if (err) {
+                // reject promise if error
+                deferred.reject(err);
+            } else {
+                // resolve promise
+                deferred.resolve(doc);
             }
-        }
+
+        });
+        // return a promise
+        return deferred.promise;
     }
 
     function findUserById(userId) {

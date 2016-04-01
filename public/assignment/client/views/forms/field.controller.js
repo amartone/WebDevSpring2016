@@ -35,13 +35,15 @@
             FieldService
                 .getFieldsForForm(formId)
                 .then(function (response) {
+                    console.log("Controller has fields" + response.data);
                     vm.fields = response.data;
+
                 });
-            FormService
-                .findFormById(formId)
-                .then(function (response) {
-                    vm.form = response.data;
-                });
+            //FormService
+            //    .findFormById(formId)
+            //    .then(function (response) {
+            //        vm.form = response.data;
+            //    });
         }
 
         init();

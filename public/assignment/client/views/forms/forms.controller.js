@@ -18,6 +18,8 @@
         vm.forms = [];
 
         function showForms() {
+            console.log("User ID: " + $rootScope.currentUser._id);
+
             FormService.findAllFormsForUser($rootScope.currentUser._id)
                 .then(function(response){
                     if(response.data) {
