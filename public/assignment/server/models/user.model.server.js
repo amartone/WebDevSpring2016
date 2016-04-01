@@ -46,7 +46,7 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
-        UserModel.findByIdAndUpdate( userId, user, {new:true}, function(err, doc){
+        UserModel.findByIdAndUpdate(userId, user, {new:true, upsert: true}, function(err, doc){
             if (err) {
                 // reject promise if error
                 deferred.reject(err);
