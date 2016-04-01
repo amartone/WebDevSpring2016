@@ -35,9 +35,21 @@ module.exports = function (app, formModel) {
     function deleteFieldById(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        formModel.deleteField(formId, fieldId);
-        res.send(200);
-    }
+
+        fieldId = formModel.deleteField(formId, fieldId)
+            .then(function (doc){
+            console.log("Deleting field from server: " + doc);
+            res.json(doc);
+        },
+        function(err){
+            res.status(400).send(err);
+
+        }
+
+    );
+}
+
+
 
     function addField(req, res) {
         var field = req.body;

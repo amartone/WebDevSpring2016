@@ -43,17 +43,18 @@ module.exports = function (db, mongoose) {
     }
 
     function updateUser(userId, user) {
-
         var deferred = q.defer();
 
-        user =  {username: user.username,
-            password: user.password,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            emails: user.emails,
-            phones: user.phones}
+        //user =  {username: user.username,
+        //    password: user.password,
+        //    firstName: user.firstName,
+        //    lastName: user.lastName,
+        //    emails: user.emails,
+        //    phones: user.phones}
 
-        UserModel.findByIdAndUpdate(userId, {$set:user}, {new:true, upsert: true}, function(err, doc){
+        //Note: need to use $set if MongoDB = 2.4.x
+
+        UserModel.findByIdAndUpdate(userId, user, {new:true}, function(err, doc){
             if (err) {
                 // reject promise if error
                 deferred.reject(err);
