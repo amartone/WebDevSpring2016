@@ -33,7 +33,7 @@
         }
 
         function findFormById(formId){
-            return $http.get("/api/assignment/form" + formId);
+            return $http.get("/api/assignment/form/" + formId);
 
         }
 

@@ -15,7 +15,6 @@ module.exports = function (app, formModel) {
         formId = formModel.findFieldsByFormId(formId)
             .then(
                 function (doc){
-                    console.log("Getting fields from server: " + doc);
                     res.json(doc);
                 },
                 function(err){
@@ -38,7 +37,6 @@ module.exports = function (app, formModel) {
 
         fieldId = formModel.deleteField(formId, fieldId)
             .then(function (doc){
-            console.log("Deleting field from server: " + doc);
             res.json(doc);
         },
         function(err){
@@ -58,7 +56,6 @@ module.exports = function (app, formModel) {
         field = formModel.createField(formId, field)
             .then(
                 function (doc){
-                    console.log("Adding field from server: " + doc);
                     res.json(doc);
                 },
                 function(err){
@@ -74,6 +71,18 @@ module.exports = function (app, formModel) {
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
         var field = req.body;
-        res.json(formModel.updateField(formId, fieldId, field));
+
+
+        field = formModel.updateField(formId, fieldId, field)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+
+
+            );
     }
 };

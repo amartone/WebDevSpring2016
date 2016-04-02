@@ -15,7 +15,6 @@
         }
         init();
         function register(user) {
-            console.log(user.firstName);
 
             UserService
                 .register(user)

@@ -48,8 +48,6 @@ module.exports = function (db, mongoose) {
                 // reject promise if error
                 deferred.reject(err);
             } else {
-                console.log("model created the form:" + doc);
-                console.log(doc.fields);
                 // resolve promise
                 deferred.resolve(doc);
             }
@@ -64,13 +62,16 @@ module.exports = function (db, mongoose) {
     }
 
     function findFormById(formId) {
-        for (u in mock) {
-            if (mock[u]._id === formId) {
-                return mock[u];
-            }
-        }
-        return null;
+        var deferred = q.defer();
 
+        FormModel.findById(formId, function(err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
     }
 
     function updateForm(formId, form) {
@@ -78,7 +79,11 @@ module.exports = function (db, mongoose) {
 
         form.updated = (new Date()).getTime();
 
-        FormModel.findOneAndUpdate({_id: formId}, form, {new:true}, function (err, doc) {
+
+
+
+
+        FormModel.findByIdAndUpdate(formId, {$set: form}, {new:true, upsert:true}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -98,7 +103,6 @@ module.exports = function (db, mongoose) {
             if (err) {
                 deferred.reject(err);
             } else {
-                console.log("Form deleted in model: " + doc);
                 deferred.resolve(doc);
             }
         });
@@ -124,7 +128,6 @@ module.exports = function (db, mongoose) {
             if (err) {
                 deferred.reject(err);
             } else {
-                console.log("Form found in model: " + doc);
                 deferred.resolve(doc);
             }
         });
@@ -182,7 +185,6 @@ module.exports = function (db, mongoose) {
             if (err) {
                 deferred.reject(err);
             } else {
-                console.log("Getting fields from model: " + doc.fields);
                 deferred.resolve(doc.fields)
             }
         });
@@ -193,11 +195,10 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
-        FormModel.update({_id: formId, "fields._id": field._id}, {$set: {"fields.$": field}}, {new: true}, function (err, doc) {
+        FormModel.update({_id: formId, "fields._id": fieldId}, {$set: {"fields.$": field}}, {new: true}, function (err, doc) {
                 if (err) {
                 deferred.reject(err);
             } else {
-                console.log("Getting fields from model: " + doc.fields);
                 deferred.resolve(doc.fields)
             }
         });

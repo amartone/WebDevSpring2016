@@ -14,7 +14,6 @@ module.exports = function (app, formModel) {
         userId = formModel.findFormsByUserId(userId)
             .then(
                 function ( doc ) {
-                    console.log("Form found...." + doc);
                     res.json(doc);
                 },
                 // send error if promise rejected
@@ -27,7 +26,19 @@ module.exports = function (app, formModel) {
 
     function getFormById(req, res) {
         var formId = req.params.formId;
-        res.json(formModel.findFormById(formId));
+
+        formId = formModel.findFormById(formId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+
+                function(err){
+                    res.status(200).send(err);
+
+                }
+            );
+
     }
 
     function deleteForm(req, res) {
@@ -36,7 +47,6 @@ module.exports = function (app, formModel) {
         formId = formModel.deleteForm(formId)
             .then(
                 function ( doc ) {
-                    console.log("Form deleted...." + doc);
                     res.json(doc);
                 },
                 // send error if promise rejected
@@ -53,7 +63,6 @@ module.exports = function (app, formModel) {
         form = formModel.createFormForUser(form, userId)
             .then(
                 function ( doc ) {
-                    console.log("Form created...." + doc);
                     res.json(doc);
                 },
                 // send error if promise rejected

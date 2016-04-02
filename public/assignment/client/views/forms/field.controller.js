@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController(FieldService, FormService, $routeParams) {
+    function FieldController(FieldService, FormService, $routeParams, $scope) {
         var vm = this;
         var formId = null;
         vm.edit_field = null;
@@ -31,25 +31,39 @@
             formId = $routeParams.formId;
         }
 
+        $scope.sortableOptions = {
+
+            stop: function(e, ui) {
+                console.log("Fields are:" + vm.fields)
+                vm.form.fields = vm.fields;
+                console.log("After: " + vm.form.fields);
+                FormService.updateFormById(vm.form._id, vm.form)
+                    .then(init());
+                // this callback has the changed model
+
+            }
+        };
+
+
         function init() {
             FieldService
                 .getFieldsForForm(formId)
                 .then(function (response) {
-                    console.log("Controller has fields" + response.data);
                     vm.fields = response.data;
-
+                    console.log("Fields are:" + vm.fields);
                 });
-            //FormService
-            //    .findFormById(formId)
-            //    .then(function (response) {
-            //        vm.form = response.data;
-            //    });
+            FormService
+                .findFormById(formId)
+                .then(function (response) {
+                    vm.form = response.data;
+                    console.log("Form is:" + vm.form.fields);
+                });
+
         }
 
         init();
 
         function deleteField(field) {
-            vm.cField = null;
             FieldService
                 .deleteFieldFromForm(formId, field._id)
                 .then(init);
@@ -87,20 +101,24 @@
         function confirmEdit(field) {
             if (field.type == 'OPTIONS' || 'RADIOS' || 'CHECKBOXES') {
                 var optionArray = [];
-                var option_text = vm.optionTextList;
+                var option_text = vm.optionTextList.split("\n");
                 for (var opt in option_text) {
                     var o = option_text[opt].split(":");
                     optionArray.push({
                         label: o[0],
                         value: o[1]
                     });
+
                 }
                 field.options = optionArray;
             }
             FieldService
                 .updateField(formId, field._id, field)
-                .then(init);
-            vm.edit_field = null;
+                .then(function(response){
+                    init();
+
+                });
+            //vm.edit_field = null;
 
         }
     }

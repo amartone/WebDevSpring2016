@@ -9,7 +9,7 @@
             </ul>
             <br>
             <table class="table table-responsive">
-                <tbody ui-sortable ng-model="model.fields">
+                <tbody ui-sortable="sortableOptions" ng-model="model.fields">
                 <tr ng-switch="field.type" ng-repeat="field in model.fields">
                     <td ng-switch-when="TEXT">
                         <label>{{field.label}}</label>
@@ -259,7 +259,7 @@
                                     <br>
                                     <label>Options</label>
                             <textarea ng-model="model.optionTextList" class="form-control"
-                                      placeholder="Edit Dropdown Options" ng-list="&#10;" ng-trim="false"></textarea>
+                                      placeholder="Edit Dropdown Options" ng-trim="false"></textarea>
                                 </form>
                             </div>
                             <div ng-switch-when="DATE">
@@ -280,7 +280,7 @@
                                     <label>Options</label>
                                 <textarea ng-model="model.optionTextList" class="form-control"
                                           placeholder="Edit Radio Options"
-                                          ng-list="&#10;" ng-trim="false"></textarea>
+                                           ng-trim="false"></textarea>
                                 </form>
                             </div>
                             <div ng-switch-when="CHECKBOXES">
@@ -292,7 +292,7 @@
                                     <br>
                                     <label>Options</label>
                             <textarea ng-model="model.optionTextList" class="form-control"
-                                      placeholder="Edit Checkbox options" ng-list="&#10;" ng-trim="false"></textarea>
+                                      placeholder="Edit Checkbox options" ng-trim="false"></textarea>
                                 </form>
                             </div>
                         </div>

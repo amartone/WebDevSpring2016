@@ -15,6 +15,7 @@
             UserService.getCurrentUser()
                 .then(function(response){
                     vm.user=response.data;
+                    console.log(vm.user.emails);
                 });
         }
 
@@ -23,11 +24,20 @@
         function update(user) {
             console.log(user.username);
             console.log(user._id);
+
+            var emails = user.emails.toString().split(",");
+            user.emails = emails;
+
+            var phones = user.phones.toString().split(",");
+            user.phones = phones;
+
+
             UserService
                 .updateUser(user._id, user)
                 .then(function (response) {
                     var currentUser = response.data;
                     if(currentUser){
+                        console.log(currentUser);
                         UserService.setCurrentUser(currentUser);
                         $location.url("/profile");
                     }
