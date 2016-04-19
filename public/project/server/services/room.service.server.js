@@ -6,32 +6,79 @@ module.exports = function (app, roomModel) {
     app.put("/api/project/room/:roomId", updateRoom);
 
     function getRoomsForUser(req, res) {
-        var userId = req.params.userId;
-        res.json(roomModel.findRoomsByUserId(userId));
-    }
+      var userId = req.params.userId;
 
+      userId = roomModel.findRoomsByUserId(userId)
+                  .then(
+                      function ( doc ) {
+                          res.json(doc);
+                      },
+                      // send error if promise rejected
+                      function ( err ) {
+                          res.status(400).send(err);
+                      }
+                  );
+  }
+    
     function getRoomById(req, res) {
         var roomId = req.params.roomId;
-        res.json(roomModel.findRoomById(roomId));
+
+        roomId = roomModel.findRoomById(roomId)
+                    .then(
+                        function(doc){
+                            res.json(doc);
+                        },
+                        function(err){
+                            res.status(200).send(err);
+                        }
+                    );
     }
 
     function deleteRoom(req, res) {
         var roomId = req.params.roomId;
-        roomModel.deleteRoom(roomId);
-        res.send(200);
+
+        roomId = roomModel.deleteIssue(issueId)
+                    .then(
+                        function ( doc ) {
+                            res.json(doc);
+                        },
+                        // send error if promise rejected
+                        function ( err ) {
+                            res.status(200).send(err);
+                        }
+                    );
     }
 
     function createRoomForUser(req, res) {
         var userId = req.params.userId;
         var room = req.body;
-        res.json(roomModel.createRoom(room, userId));
-    }
+
+        room = roomModel.createRoomForUser(room, userId)
+          .then(
+              function ( doc ) {
+                  res.json(doc);
+              },
+              // send error if promise rejected
+              function ( err ) {
+                  res.status(400).send(err);
+              }
+          );
+  }
 
     function updateRoom(req, res) {
         var roomId = req.params.roomId;
         var room = req.body;
-        console.log(room);
-        console.log(roomId);
-        res.json(roomModel.updateRoom(roomId, room));
+        room = roomModel.updateRoom(roomId, room)
+                    .then(
+                        function ( doc ) {
+                            console.log("Room updated...." + doc);
+                            res.json(doc);
+                        },
+                        // send error if promise rejected
+                        function ( err ) {
+                            res.status(400).send(err);
+                        }
+                    );
+
     }
 };

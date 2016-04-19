@@ -12,7 +12,6 @@ module.exports = function (uuid) {
   var RoomSchema= require("./room.schema.server.js")(mongoose);
   var RoomModel = mongoose.model('Room', RoomSchema);
 
-
     var api = {
         createRoom: createRoom,
         findAllRooms: findAllRooms,
@@ -24,58 +23,80 @@ module.exports = function (uuid) {
     return api;
 
     function createRoomForUser(room) {
+      room.createdAt = (new Date()).getTime();
+
         var deferred = q.defer();
+        RoomModel.create(room, function(err, doc){
+                    if (err) {
+                        // reject promise if error
+                        deferred.reject(err);
+                    } else {
+                        // resolve promise
+                        deferred.resolve(doc);
+                    }
 
-
-
-        room._id = uuid.v1();
-        mock.push(room);
-        return room;
+                });
+                // return a promise
+                return deferred.promise;
     }
+
 
     function updateRoom(roomId, room) {
-        console.log(roomId);
-        for (var u in mock) {
-            if (mock[u]._id == roomId) {
-                mock[u].name = room.name;
-                mock[u].issues = room.issues;
-                mock[u].creator = room.creator;
-                return mock[u];
-            }
-        }
-    }
+      var deferred = q.defer();
+
+      RoomModel.findByIdAndUpdate(roomId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
+                  if (err) {
+                        deferred.reject(err);
+                  } else {
+                      console.log("Room updated in model: " + doc);
+                      deferred.resolve(doc);
+                  }
+              });
+              return deferred.promise;
+          }
+
 
     function findRoomById(roomId) {
-        for (u in mock) {
-            if (mock[u]._id == roomId) {
-                return mock[u];
-            }
-        }
-        return null;
-    }
+      var deferred = q.defer();
+
+      RoomModel.findById(roomId, function(err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
+  }
 
     function deleteRoom(roomId) {
-        for (var u in mock) {
-            if (mock[u]._id == roomId) {
-                mock.splice(u, 1);
-                return true;
-            }
-        }
+      var deferred = q.defer();
+
+      RoomModel.remove({_id: roomId}, function (err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
     }
 
-    function findAllRooms() {
+    function findAllRooms() { //need to refactor
         return mock;
     }
 
     function findRoomsByUserId(userId){
-        var listOfRooms = [];
-        for (var f in mock) {
-            if (mock[f].userId == userId) {
-                listOfRooms.push(mock[f]);
-            }
-        }
-        return listOfRooms;
+      var deferred = q.defer();
 
-    }
+      RoomModel.find({userId: userId}, function (err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
+  }
 
 };
