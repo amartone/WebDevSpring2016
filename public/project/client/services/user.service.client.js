@@ -24,7 +24,7 @@
 
 
         function getCurrentUser(){
-                return $http.get("/api/assignment/loggedin");
+                return $http.get("/api/project/loggedin");
             }
 
         function findAllUsers(){
@@ -60,7 +60,7 @@
         }
 
         function findUserById(userId){
-              return http.get("/api/assignment/user/", userId);
+              return $http.get("/api/project/user/" + userId);
           }
 
         function deleteUserById(userId){

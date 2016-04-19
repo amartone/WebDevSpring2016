@@ -6,7 +6,7 @@
         .module("ProjectIssuesApp")
         .controller("IssueController", IssueController);
 
-    function IssueController(IssueService, $rootScope, $routeParams, Upload) {
+    function IssueController(IssueService, $rootScope, $routeParams, Upload, RoomService, UserService) {
 
         var vm = this;
         vm.addIssue = addIssue;
@@ -15,22 +15,49 @@
         vm.selectIssue = selectIssue;
         vm.updateIssueDetails = updateIssueDetails;
         vm.uploadPhoto = uploadPhoto;
+        vm.findAllRoomsForUser = findAllRoomsForUser;
+        vm.getUsersInSystem = getUsersInSystem;
 
         //The issue in the routeParams
         vm.issue = null;
         //The list of issues particular to a user
         vm.issues = [];
         vm.issueId = null;
+        vm.users = [];
+
+        function getUsersInSystem(){
+          UserService.findAllUsers()
+            .then(function(response){
+              if(response){
+                console.log(response.data)
+                for (var user in response.data){
+                  vm.users.push(response.data[user]);
+                }
+                console.log(vm.users);
+              }
+            })
+        }
+        getUsersInSystem();
+
+        function findAllRoomsForUser(){
+
+          RoomService.findRoomsUserBelongs($rootScope.currentUser._id)
+            .then(function(response){
+                if(response.data){
+                  vm.rooms = response.data
+                }
+
+            });
+        }
+
+        findAllRoomsForUser();
 
         function init() {
-
-
             if ($routeParams.issueId) {
                 issueId = $routeParams.issueId;
                 IssueService.findIssueById(issueId)
                     .then(function (response) {
                         if (response.data) {
-                            console.log(response.data);
                             vm.issue = response.data;
 
                         }
@@ -40,7 +67,6 @@
                 IssueService.findAllIssuesForUser($rootScope.currentUser._id)
                     .then(function (response) {
                         if (response.data) {
-                            console.log(response.data);
                             vm.issues = response.data;
                         }
                     });
@@ -50,21 +76,27 @@
         init();
 
         function addIssue(issue) {
-            console.log("test");
+
             IssueService.createIssueForUser($rootScope.currentUser._id, issue)
                 .then(function (response) {
                     if (response.data) {
-                        console.log(response.data);
                         vm.issues.push(response.data);
+                        console.log("Issue created:" + response.data)
                     }
                 });
+            //RoomService.updateRoomIssuesById(issueId, roomId)
+            //  .then(function(response){
+            //      if(response){
+            //        console.log("Updated room with issue...")
+            //      }
+            //  });
+            //    });
         }
 
         function updateIssue(issue) {
             IssueService.updateIssueById(issue._id, issue)
                 .then(function (response) {
                     if (response.data) {
-                        console.log(response.data);
                         delete vm.issue;
                     }
                 });
@@ -76,7 +108,6 @@
             IssueService.updateIssueById(issue._id, issue)
                 .then(function (response) {
                     if (response.data) {
-                        console.log(response.data);
                     }
                 });
             //delete $scope.form;
@@ -102,7 +133,6 @@
 
             }).then(
                 function (response) {
-                    console.log("The image URL is: " + response.data);
                     vm.issue.image = response.data;
                     updateIssueDetails(vm.issue);
                 }

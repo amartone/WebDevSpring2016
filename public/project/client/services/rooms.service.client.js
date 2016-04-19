@@ -13,7 +13,9 @@
             findAllRoomsForUser: findAllRoomsForUser,
             deleteRoomById: deleteRoomById,
             updateRoomById: updateRoomById,
-            findRoomById: findRoomById
+            findRoomById: findRoomById,
+            findRoomsUserBelongs: findRoomsUserBelongs,
+            updateRoomIssuesById: updateRoomIssuesById
         };
         return api;
 
@@ -25,12 +27,20 @@
             return $http.get("/api/project/room/" + userId + "/room");
         }
 
+        function findRoomsUserBelongs(userId){
+          return $http.get("/api/project/room/" + userId + "/room/all/")
+        }
+
         function deleteRoomById(roomId, room) {
             return $http.delete("/api/project/room/" + roomId, room);
         }
 
         function updateRoomById(roomId, room) {
             return $http.put("/api/project/room/" + roomId, room);
+        }
+
+        function updateRoomIssuesById(roomId, issueId){
+          return $http.put("/api/project/room/" + roomId + "/" +  issueId);
         }
 
         function findRoomById(roomId, room){

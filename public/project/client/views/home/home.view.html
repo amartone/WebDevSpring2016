@@ -8,7 +8,7 @@
     </div>
     <div class="col-sm-6">
   <div class="row" ng-repeat="r in model.rooms">
-          
+
       <div class="col-sm-6">
           <div class="thumbnail">
               <div class="caption">
@@ -16,7 +16,7 @@
                   <h3>{{r.title}}</h3>
                   <p> <span class="glyphicon glyphicon-user"></span> {{r.users.length}}</p>
                   <p> <span class="glyphicon glyphicon-bell"></span> {{r.issues.length}}</p>
-                  <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
+                  <a href="#/roomdetails/{{r._id}}" class="btn btn-primary" role="button">View</a> <a href="#/editroom/{{r._id}}" class="btn btn-warning" role="button">Edit</a>
           </div>
       </div>
   </div>

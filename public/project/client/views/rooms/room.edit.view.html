@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="RoomController">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Edit Room</h1>
@@ -6,47 +6,25 @@
                 <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                        <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Andrew's Apartment">
+                        <input ng-model="model.room.title" type="text" class="form-control" id="username" placeholder="Andrew's Apartment">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="issues" class="col-sm-2 control-label">Issues</label>
-                    <div class="col-sm-10">
-                    <div class="list-group" id="issues">
-                        <button type="button" class="list-group-item">Clean room</button>
-                        <button type="button" class="list-group-item">Take out trash</button>
-                        <button type="button" class="list-group-item">Organize room</button>
-
-                    </div>
-
+                  <label for="multipleSelect" class="col-sm-2 control-label">Select issues:  </label><br>
+                  <div class="col-sm-10">
+                    <select name="multipleSelect" id="multipleSelect" ng-model="model.room.issues" multiple>
+                          <option ng-repeat="issue in model.issues" value="{{issue._id}}">{{issue.title}}</option>
+                        </select><br>
                 </div>
-
-
-
+              </div>
                 <div class="form-group">
-                    <label for="people" class="col-sm-2 control-label">People</label>
-                    <div class="col-sm-10">
-                        <div class="checkbox" id="people">
-                            <label>
-                                <input type="checkbox" value="">
-                                Andrew
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                Josh
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                Adam
-                            </label>
-                        </div>
-                    </div>
+                  <label for="multipleSelect" class="col-sm-2 control-label">Select users:  </label><br>
+                  <div class="col-sm-10">
+                    <select name="multipleSelect" id="multipleSelect" ng-model="model.room.users" multiple>
+                          <option ng-repeat="user in model.users" value="{{user._id}}">{{user.username}}</option>
+                        </select><br>
                 </div>
-
+              </div>
                 <div class="form-group">
                     <label for="uploadImage" class="col-sm-2 control-label">Upload new image</label>
                     <div class="col-sm-10" id="uploadImage">

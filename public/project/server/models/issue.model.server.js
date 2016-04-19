@@ -14,16 +14,33 @@ module.exports = function (db, mongoose) {
         updateIssue: updateIssue,
         deleteIssue: deleteIssue,
         findIssueByTitle: findIssueByTitle,
-        findIssuesByUserId: findIssuesByUserId
+        findIssuesByUserId: findIssuesByUserId,
+        getIssuesByRoomId: getIssuesByRoomId
 
     };
     return api;
+
+    function getIssuesByRoomId(roomId){
+
+      var deferred = q.defer();
+
+      IssueModel.find({roomId: roomId}, function (err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
+  }
+
 
     function createIssueForUser(issue, userId) {
         var deferred = q.defer();
 
         var newIssue = {
           userId: userId,
+          roomId: issue.roomId,
           title: issue.title,
           priority: issue.priority,
           description: issue.description,
@@ -68,13 +85,12 @@ module.exports = function (db, mongoose) {
     var deferred = q.defer();
 
     issue.updated = (new Date()).getTime();
-    issue.image = issue.image.replace("./" , "");
+    //issue.image = issue.image.replace("./" , "");
 
     IssueModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
                 if (err) {
                       deferred.reject(err);
                 } else {
-                    console.log("Issue updated in model: " + doc);
                     deferred.resolve(doc);
                 }
             });

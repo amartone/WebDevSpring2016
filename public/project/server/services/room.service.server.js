@@ -4,6 +4,40 @@ module.exports = function (app, roomModel) {
     app.delete("/api/project/room/:roomId", deleteRoom);
     app.post("/api/project/room/:userId/room", createRoomForUser);
     app.put("/api/project/room/:roomId", updateRoom);
+    app.get("/api/project/room/:userId/room/all", getRoomsUserBelongsTo);
+    app.put("/api/project/room/:roomId/:issueId", updateRoomIssuesById);
+
+
+function updateRoomIssuesById(req, res){
+var roomId = req.params.roomId;
+var issueId = req.params.issueId;
+
+roomModel.updateRoomIssuesById(roomId, issueId)
+.then(
+  function ( doc ) {
+  res.json(doc);
+},
+// send error if promise rejected
+  function ( err ) {
+  res.status(400).send(err);
+}
+);
+}
+
+    function getRoomsUserBelongsTo(req, res){
+      var userId = req.params.userId;
+      userId = roomModel.findRoomsUserBelongs(userId)
+            .then(
+          function ( doc ) {
+              res.json(doc);
+          },
+          // send error if promise rejected
+          function ( err ) {
+              res.status(400).send(err);
+          }
+      );
+}
+
 
     function getRoomsForUser(req, res) {
       var userId = req.params.userId;
@@ -19,7 +53,7 @@ module.exports = function (app, roomModel) {
                       }
                   );
   }
-    
+
     function getRoomById(req, res) {
         var roomId = req.params.roomId;
 
@@ -71,7 +105,6 @@ module.exports = function (app, roomModel) {
         room = roomModel.updateRoom(roomId, room)
                     .then(
                         function ( doc ) {
-                            console.log("Room updated...." + doc);
                             res.json(doc);
                         },
                         // send error if promise rejected

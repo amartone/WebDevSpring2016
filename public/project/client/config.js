@@ -29,7 +29,10 @@
             .when("/profile/:userId/", {
                 templateUrl: "views/users/profile.details.view.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/profile/", {
                 templateUrl: "views/users/profile.view.html",
@@ -63,12 +66,18 @@
             .when("/issuedetails/:issueId/", {
                 templateUrl: "views/details/issues.details.view.html",
                 controller: "IssueController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/roomdetails/:roomId", {
                 templateUrl: "views/details/room.details.view.html",
                 controller: "RoomController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/createissue", {
                 templateUrl: "views/issues/create.issue.view.html",

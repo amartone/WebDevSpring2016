@@ -12,12 +12,11 @@ module.exports = function (app, userModel, multer) {
     app.get("/api/project/user", apiRouter);
     app.delete("/api/project/user/:id", deleteUser);
     app.post("/api/project/logout", logout);
-    app.get("/api/assignment/loggedin", loggedIn);
+    app.get("/api/project/loggedin", loggedIn);
 
 
     function apiRouter(req, res) {
         if (req.query.username && req.query.password) {
-            console.log("made");
             findUserByCredentials(req, res);
         }
         else if (req.query.username) {
@@ -31,7 +30,6 @@ module.exports = function (app, userModel, multer) {
 
 
     function loggedIn(req, res){
-        console.log(req.session.currentUser);
         res.json(req.session.currentUser);
     }
     function updateUser(req, res) {

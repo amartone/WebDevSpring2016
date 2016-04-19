@@ -17,10 +17,27 @@ module.exports = function (app, issueModel, multer, fs) {
     app.get("/api/project/user/:userId/issue", getIssuesForUser);
     app.get("/api/project/issue/:issueId", getIssueById);
     app.delete("/api/project/issue/:issueId", deleteIssue);
-    app.post("/api/project/user/:userId/issue", createIssueForUser);
+    app.post("/api/project/user/:userId/issue/", createIssueForUser);
     app.put("/api/project/issue/:issueId", updateIssue);
     app.post("/api/project/photo/", upload.single('file'), uploadPhoto);
     app.get("/api/project/user/photo", findPhoto);
+    app.get("/api/project/issue/all/:roomId", getIssuesByRoomId);
+
+    function getIssuesByRoomId(req, res){
+
+      var roomId = req.params.roomId;
+
+       issueModel.getIssuesByRoomId(roomId)
+                  .then(
+                      function ( doc ) {
+                          res.json(doc);
+                      },
+                      // send error if promise rejected
+                      function ( err ) {
+                          res.status(400).send(err);
+                      }
+                  );
+    }
 
 
     function uploadPhoto(req, res){
@@ -77,6 +94,7 @@ module.exports = function (app, issueModel, multer, fs) {
         var userId = req.params.userId;
         var issue = req.body;
 
+
         form = issueModel.createIssueForUser(issue, userId)
           .then(
               function ( doc ) {
@@ -117,6 +135,3 @@ module.exports = function (app, issueModel, multer, fs) {
         });
     }
 };
-
-
-

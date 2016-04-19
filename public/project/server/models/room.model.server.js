@@ -18,9 +18,46 @@ module.exports = function (db, mongoose) {
         findRoomById: findRoomById,
         updateRoom: updateRoom,
         deleteRoom: deleteRoom,
-        findRoomsByUserId: findRoomsByUserId
+        findRoomsByUserId: findRoomsByUserId,
+        findRoomsUserBelongs: findRoomsUserBelongs,
+        updateRoomIssuesById: updateRoomIssuesById
     };
     return api;
+
+function updateRoomIssuesById(roomId, issueId){
+  var deferred = q.defer();
+
+        RoomModel.update({_id: roomId}, {$push: {"issues": issueId}}, {upsert:true}, function(err, doc){
+            if (err) {
+                // reject promise if error
+                deferred.reject(err);
+            } else {
+                // resolve promise
+                deferred.resolve(doc);
+            }
+
+        });
+        // return a promise
+        return deferred.promise;
+}
+
+    function findRoomsUserBelongs(userId){
+        var deferred = q.defer();
+
+      RoomModel.find({users: userId}, function(err, doc){
+                  if (err) {
+                      // reject promise if error
+                      deferred.reject(err);
+                  } else {
+                      // resolve promise
+
+                      deferred.resolve(doc);
+                  }
+
+              });
+              // return a promise
+              return deferred.promise;
+  }
 
     function createRoomForUser(room, userId) {
       room.createdAt = (new Date()).getTime();
@@ -49,7 +86,6 @@ module.exports = function (db, mongoose) {
                   if (err) {
                         deferred.reject(err);
                   } else {
-                      console.log("Room updated in model: " + doc);
                       deferred.resolve(doc);
                   }
               });

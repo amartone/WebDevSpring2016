@@ -12,16 +12,20 @@
             findAllIssuesForUser: findAllIssuesForUser,
             deleteIssueById: deleteIssueById,
             updateIssueById: updateIssueById,
-            findIssueById: findIssueById
+            findIssueById: findIssueById,
+            getIssuesByRoomId: getIssuesByRoomId
         };
         return api;
 
+        function getIssuesByRoomId(roomId){
+          return $http.get("/api/project/issue/all/" + roomId);
+        }
+
         function createIssueForUser(userId, issue) {
-            return $http.post("/api/project/user/" + userId + "/issue", issue);
+            return $http.post("/api/project/user/" + userId + "/issue/", issue);
         }
 
         function findAllIssuesForUser(userId) {
-            console.log("getting issues ");
 
             return $http.get("/api/project/user/" + userId + "/issue")
         }
