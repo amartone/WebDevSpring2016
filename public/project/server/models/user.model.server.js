@@ -83,7 +83,18 @@ module.exports = function (uuid, db, mongoose) {
     }
 
     function findAllUsers() {
-        return mock;
+      var deferred = q.defer();
+      UserModel.find({}, function(err, doc) {
+          if(err){
+            deferred.reject(err);
+          }
+          else{
+            deferred.resolve(doc);
+              console.log("All users: " + doc)
+          }
+
+      });
+      return deferred.promise;
     }
 
     function findUserByUsername(username) {

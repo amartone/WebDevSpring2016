@@ -6,14 +6,30 @@
         .module("ProjectIssuesApp")
         .controller("RoomController", RoomController);
 
-    function RoomController(RoomService, $rootScope) {
+    function RoomController(RoomService, UserService, IssueService, $rootScope) {
 
         var vm = this;
         vm.addRoom = addRoom;
         vm.updateRoom = updateRoom;
         vm.selectRoom = selectRoom;
         vm.deleteRoom = deleteRoom;
+        vm.getUsersInSystem = getUsersInSystem;
+        vm.users = [];
 
+
+        function getUsersInSystem(){
+          UserService.findAllUsers()
+            .then(function(response){
+              if(response){
+                console.log(response.data)
+                for (var user in response.data){
+                  vm.users.push(response.data[user]);
+                }
+                console.log(vm.users);
+              }
+            })
+        }
+        getUsersInSystem();
 
         function showRooms() {
             RoomService.findAllRoomsForUser($rootScope.currentUser._id)
@@ -32,9 +48,8 @@
                 .then(function(response){
                     if(response.data){
                         console.log(response.data);
-                        vm.rooms.push(response.data);
+                        
                     }
-
                 });
         }
 

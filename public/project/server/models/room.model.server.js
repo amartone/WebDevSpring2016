@@ -6,14 +6,14 @@ var mock = require("./room.mock.json");
 
 var q = require("q");
 
-module.exports = function (uuid) {
+module.exports = function (db, mongoose) {
 
 
-  var RoomSchema= require("./room.schema.server.js")(mongoose);
+  var RoomSchema = require("./room.schema.server.js")(mongoose);
   var RoomModel = mongoose.model('Room', RoomSchema);
 
     var api = {
-        createRoom: createRoom,
+        createRoomForUser: createRoomForUser,
         findAllRooms: findAllRooms,
         findRoomById: findRoomById,
         updateRoom: updateRoom,
@@ -22,8 +22,9 @@ module.exports = function (uuid) {
     };
     return api;
 
-    function createRoomForUser(room) {
+    function createRoomForUser(room, userId) {
       room.createdAt = (new Date()).getTime();
+      room.userId = userId;
 
         var deferred = q.defer();
         RoomModel.create(room, function(err, doc){

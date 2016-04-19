@@ -2,13 +2,13 @@
     <h1>Roomr</h1>
     <div class="row">
         <div class="col-sm-6">
-        <h3> <span class="glyphicon glyphicon-home"></span> Rooms: 3</h3>
+        <h3> <span class="glyphicon glyphicon-home"></span> Rooms: {{model.rooms.length}}</h3>
         <h3> <span class="glyphicon glyphicon-bell"></span> Issues created: {{model.issues.length}}</h3>
         </div>
     </div>
     <div class="col-sm-6">
-    <div class="row">
-        <div class="col-sm-6">
+  <div class="row" ng-repeat="r in model.rooms">
+            <div class="col-sm-6">
             <div class="thumbnail">
                 <div class="caption">
                     <div class="user" style="background-image:url('img/linkedin.jpg')"></div>
@@ -19,31 +19,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="thumbnail">
-                <div class="caption">
-                    <div class="user" style="background-image:url('img/office.jpg')"></div>
-                    <h3>Andrew's Office</h3>
-                    <p> <span class="glyphicon glyphicon-user"></span> People: 3</p>
-                    <p> <span class="glyphicon glyphicon-bell"></span> Issues: 3</p>
-                    <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="thumbnail">
-                <div class="caption">
-                    <div class="user" style="background-image:url('img/adam.jpg')"></div>
-                    <h3>Adam's Hotel Room</h3>
-                    <p> <span class="glyphicon glyphicon-user"></span> People: 3</p>
-                    <p> <span class="glyphicon glyphicon-bell"></span> Issues: 3</p>
-                    <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
-            </div>
-        </div>
-
-    </div>
-    </div>
-
+      <div class="col-sm-6">
+          <div class="thumbnail">
+              <div class="caption">
+                  <div class="user" style="background-image:url('img/office.jpg')"></div>
+                  <h3>{{r.title}}</h3>
+                  <p> <span class="glyphicon glyphicon-user"></span> {{r.users.length}}</p>
+                  <p> <span class="glyphicon glyphicon-bell"></span> {{r.issues.length}}</p>
+                  <a href="#/roomdetails" class="btn btn-primary" role="button">View</a> <a href="#/editroom" class="btn btn-warning" role="button">Edit</a>
+          </div>
+      </div>
+  </div>
+</div>
 </div>
 
 <div class="col-sm-6">

@@ -69,8 +69,15 @@ module.exports = function (app, userModel, multer) {
 
 
     function findAllUsers(req, res) {
-        var users = userModel.findAllUsers();
-        res.json(users);
+        var users = userModel.findAllUsers()
+          .then(
+            function(doc){
+              res.json(doc)
+            },
+            function(err){
+              res.status(400).send(err);
+            }
+          );
     }
 
     function findUserById(req, res) {
