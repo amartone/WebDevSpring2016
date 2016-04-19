@@ -45,8 +45,8 @@ module.exports = function (db, mongoose) {
           priority: issue.priority,
           description: issue.description,
           assignee: issue.assignee,
-          created: (new Date()).getTime(),
-          updated: (new Date()).getTime()
+          created: (new Date()).toLocaleString(),
+          updated: (new Date()).toLocaleString()
         };
 
         IssueModel.create(newIssue, function(err, doc){
