@@ -16,10 +16,16 @@
             updateUser: updateUser,
             getLoggedIn: getLoggedIn,
             findUserById: findUserById,
-            deleteUserById: deleteUserById
+            deleteUserById: deleteUserById,
+            getCurrentUser: getCurrentUser
         };
 
         return api;
+
+
+        function getCurrentUser(){
+                return $http.get("/api/assignment/loggedin");
+            }
 
         function findAllUsers(){
             return $http.get("/api/project/user/");
@@ -54,9 +60,8 @@
         }
 
         function findUserById(userId){
-            //Probably can remove passing the userId in the body
-            return $http.get("/api/project/user/" + userId, userId);
-        }
+              return http.get("/api/assignment/user/", userId);
+          }
 
         function deleteUserById(userId){
             return $http.delete("/api/project/user/" + userId);

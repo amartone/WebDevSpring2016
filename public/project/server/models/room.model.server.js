@@ -3,7 +3,15 @@
  */
 
 var mock = require("./room.mock.json");
+
+var q = require("q");
+
 module.exports = function (uuid) {
+
+
+  var RoomSchema= require("./room.schema.server.js")(mongoose);
+  var RoomModel = mongoose.model('Room', RoomSchema);
+
 
     var api = {
         createRoom: createRoom,
@@ -15,7 +23,11 @@ module.exports = function (uuid) {
     };
     return api;
 
-    function createRoom(room) {
+    function createRoomForUser(room) {
+        var deferred = q.defer();
+
+
+
         room._id = uuid.v1();
         mock.push(room);
         return room;

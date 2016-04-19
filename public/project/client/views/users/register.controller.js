@@ -14,6 +14,7 @@
 
         }
         init();
+
         function register(user) {
             console.log(user.firstName);
 

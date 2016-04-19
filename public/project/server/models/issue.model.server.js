@@ -1,5 +1,11 @@
-var mock = require("./issue.mock.json");
-module.exports = function (uuid) {
+
+ var mock = require("./issue.mock.json"); //remove
+ var q = require("q");
+
+module.exports = function (db, mongoose) {
+
+    var IssueSchema= require("./issue.schema.server.js")(mongoose);
+    var IssueModel = mongoose.model('Issue', IssueSchema);
 
     var api = {
         createIssueForUser: createIssueForUser,
@@ -8,57 +14,89 @@ module.exports = function (uuid) {
         updateIssue: updateIssue,
         deleteIssue: deleteIssue,
         findIssueByTitle: findIssueByTitle,
-        findIssuesByUserId: findIssuesByUserId,
+        findIssuesByUserId: findIssuesByUserId
 
     };
     return api;
 
-
-
     function createIssueForUser(issue, userId) {
-        issue._id = uuid.v1();
-        issue.userId = userId;
+        var deferred = q.defer();
 
-        mock.push(issue);
-        return issue;
+        var newIssue = {
+          userId: userId,
+          title: issue.title,
+          priority: issue.priority,
+          description: issue.description,
+          assignee: issue.assignee,
+          created: (new Date()).getTime(),
+          updated: (new Date()).getTime()
+        };
+
+        IssueModel.create(newIssue, function(err, doc){
+                    if (err) {
+                        // reject promise if error
+                        deferred.reject(err);
+                    } else {
+                        // resolve promise
+                        deferred.resolve(doc);
+                    }
+
+                });
+                // return a promise
+                return deferred.promise;
     }
 
-    function findAllIssues() {
+
+    function findAllIssues() { //need to refactor
         return mock;
     }
 
     function findIssueById(issueId) {
-        for (u in mock) {
-            if (mock[u]._id === issueId) {
-                return mock[u];
-            }
-        }
-        return null;
+      var deferred = q.defer();
 
+      IssueModel.findById(issueId, function(err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
+  }
+
+    function updateIssue(issueId, issue){
+    var deferred = q.defer();
+
+    issue.updated = (new Date()).getTime();
+    issue.image = issue.image.replace("./" , "");
+
+    IssueModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
+                if (err) {
+                      deferred.reject(err);
+                } else {
+                    console.log("Issue updated in model: " + doc);
+                    deferred.resolve(doc);
+                }
+            });
+            return deferred.promise;
+
+        }
+
+    function deleteIssue(issueId, issue) {
+      var deferred = q.defer();
+
+      IssueModel.remove({_id: issueId}, function (err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
     }
 
-    function updateIssue(issueId, issue) {
-        console.log(issueId);
-        for (var u in mock) {
-            if (mock[u]._id == issueId) {
-                mock[u].title = issue.title;
-                mock[u].priority = issue.priority;
-                mock[u].description = issue.description;
-                mock[u].assignee = issue.assignee;
-                return mock[u];
-            }
-        }
-    }
-
-    function deleteIssue(formId, form) {
-        for (var u in mock) {
-            if (mock[u]._id == formId) {
-                mock.splice(u, 1);
-            }
-        }
-    }
-
-    function findIssueByTitle(formTitle) {
+    // Potentially refactor
+    function findIssueByTitle(issueTitle) {
 
         for (var f in mock) {
             if (mock[f].title === formTitle) {
@@ -69,13 +107,15 @@ module.exports = function (uuid) {
     }
 
     function findIssuesByUserId(userId) {
-        var listOfIssues = [];
-        for (var f in mock) {
-            if (mock[f].userId == userId) {
-                listOfIssues.push(mock[f]);
-            }
-        }
-        return listOfIssues;
-    }
+        var deferred = q.defer();
 
+        IssueModel.find({userId: userId}, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+    }
 }

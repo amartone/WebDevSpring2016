@@ -12,7 +12,8 @@
             createRoomForUser: createRoomForUser,
             findAllRoomsForUser: findAllRoomsForUser,
             deleteRoomById: deleteRoomById,
-            updateRoomById: updateRoomById
+            updateRoomById: updateRoomById,
+            findRoomById: findRoomById
         };
         return api;
 
@@ -30,6 +31,10 @@
 
         function updateRoomById(roomId, room) {
             return $http.put("/api/project/room/" + roomId, room);
+        }
+
+        function findRoomById(roomId, room){
+          return $http.get("/api/project/room/" + roomId, room);
         }
     }
 })();

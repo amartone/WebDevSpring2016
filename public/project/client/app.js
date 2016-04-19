@@ -22,7 +22,7 @@
 
 (function(){
     angular
-        .module("ProjectIssuesApp", ['ngRoute']);
+        .module("ProjectIssuesApp", ['ngRoute', 'ngFileUpload']);
 
 })();
 

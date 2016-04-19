@@ -38,11 +38,8 @@
             return $http.get("/api/project/issue/" + issueId);
 
 
-
         }
 
     }
 
 })();
-
-

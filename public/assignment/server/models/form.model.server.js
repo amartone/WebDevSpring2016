@@ -32,7 +32,7 @@ module.exports = function (db, mongoose) {
     return api;
 
 
-    function createFormForUser(form, userId) {
+    function createFormForUser(issue, userId) {
         var deferred = q.defer();
 
         newForm = {
@@ -61,10 +61,10 @@ module.exports = function (db, mongoose) {
         return mock;
     }
 
-    function findFormById(formId) {
+    function findFormById(issueId) {
         var deferred = q.defer();
 
-        FormModel.findById(formId, function(err, doc) {
+        IssueModel.findById(issueId, function(err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -74,25 +74,21 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function updateForm(formId, form) {
+    function updateForm(issueId, issue) {
         var deferred = q.defer();
 
-        form.updated = (new Date()).getTime();
+        issue.updated = (new Date()).getTime();
 
 
-
-
-
-        FormModel.findByIdAndUpdate(formId, {$set: form}, {new:true, upsert:true}, function (err, doc) {
+        IssueModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
-                console.log("Form updated in model: " + doc);
+                console.log("Issue updated in model: " + doc);
                 deferred.resolve(doc);
             }
         });
         return deferred.promise;
-
     }
 
     function deleteForm(formId, form) {
