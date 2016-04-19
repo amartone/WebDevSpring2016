@@ -11,7 +11,10 @@
             .when("/home",{
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
@@ -146,4 +149,3 @@
         }
 
     })();
-

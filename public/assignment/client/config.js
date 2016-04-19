@@ -88,6 +88,7 @@
         UserService.getCurrentUser()
             .then(function(response) {
                 var currentUser = response.data;
+
                 if(currentUser) {
                     UserService.setCurrentUser(currentUser);
                     deferred.resolve();
