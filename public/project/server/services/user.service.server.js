@@ -136,9 +136,12 @@ module.exports = function (app, userModel, multer) {
         );
     }
 
-    function logout(req, res) {
-      userModel.setCurrentUser(null);
-    }
+
+      function logout(req, res) {
+            req.session.currentUser = null;
+            res.json(req.session.currentUser);
+        }
+
 
     //Potentially remove
     function login(req, res) {
