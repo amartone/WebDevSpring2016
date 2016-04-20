@@ -14,8 +14,8 @@
               <div class="caption">
                   <div class="user" style="background-image:url('img/office.jpg')"></div>
                   <h3>{{r.title}}</h3>
-                  <p> <span class="glyphicon glyphicon-user"></span> {{r.users.length}}</p>
-                  <p> <span class="glyphicon glyphicon-bell"></span> {{r.issues.length}}</p>
+                  <!--<p> <span class="glyphicon glyphicon-user"></span> {{r.users.length}}</p>
+                  <p ng-model="model.getNumIssues" ng-init="getNumIssues='{{r._id}}'"> <span class="glyphicon glyphicon-bell"></span>{{model.getNumIssues.length}}</p>-->
                   <a href="#/roomdetails/{{r._id}}" class="btn btn-primary" role="button">View</a> <a href="#/editroom/{{r._id}}" class="btn btn-warning" role="button">Edit</a>
           </div>
       </div>

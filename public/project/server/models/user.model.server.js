@@ -87,10 +87,12 @@ module.exports = function (uuid, db, mongoose) {
 
     function findUserById(userId) {
       var deferred = q.defer();
-    UserModel.findOne({userId: userId}, function (err, doc) {
+      console.log("user id:" + userId)
+    UserModel.findById(userId, function (err, doc) {
         if (err) {
             deferred.reject(err);
         } else {
+          console.log("found: " + doc)
             deferred.resolve(doc);
         }
     });

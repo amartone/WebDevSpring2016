@@ -6,7 +6,7 @@ module.exports = function (app, userModel, multer) {
 
 
     app.post("/api/project/user", register);
-    app.get("/api/project/user/:id", findUserById);
+    app.get("/api/project/user/:userId", findUserById);
     app.put("/api/project/user/:id", updateUser);
     //app.get("/api/assignment/user?username=username", findUserByUsername);
     app.get("/api/project/user", apiRouter);

@@ -10,9 +10,11 @@
 
         var vm = this;
         vm.issues = [];
+        vm._issues = [];
         vm.test = "Hi";
         vm.user = 0;
         vm.rooms = []
+        vm.getNumIssues = getNumIssues;
 
         function showIssues() {
             if($rootScope.currentUser){
@@ -26,7 +28,7 @@
                     }
                 });
 
-                IssueService.getAllIssues()
+                IssueService.findIssuesWhereAsignee(vm.user)
                 .then(function(response){
                   if(response.data){
                     console.log("Got all the issues" + response.data)
@@ -36,6 +38,22 @@
                 });
         }
         showIssues();
+
+
+        function getNumIssues(roomId) {
+          console.log("The room id:" +roomId)
+            IssueService.getIssuesByRoomId(roomId)
+                .then(function (response) {
+                    if (response.data) {
+                      console.log("num issues:" + response.data)
+
+                        vm._issues = response.data;
+                    }
+
+                });
+                return vm._issues;
+        }
+        getNumIssues();
 
         function showRooms(){
 
