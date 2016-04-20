@@ -27,7 +27,11 @@
 
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
-                        Assignee
+                        Assignee ID
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Room ID
                     </th>
 
                     <th>
@@ -52,7 +56,10 @@
                         <input ng-model="model.issue.description" type="text" class="form-control" placeholder="Description">
                     </td>
                     <td>
-                        <input ng-model="model.issue.assignee" type="text" class="form-control" placeholder="Assignee">
+                        <input ng-model="model.issue.assignee" type="text" class="form-control" placeholder="Assignee ID">
+                    </td>
+                    <td>
+                        <input ng-model="model.issue.roomId" type="text" class="form-control" placeholder="Room ID">
                     </td>
                     <td>
                         <input ng-model="model.issue.image" type="text" class="form-control" placeholder="Image">
@@ -70,6 +77,7 @@
                     <td>{{i.priority}}</td>
                     <td>{{i.description}}</td>
                     <td>{{i.assignee}}</td>
+                    <td>{{i.roomId}}</td>
                     <td>{{i.image}}</td>
                     <td>
                         <div class="btn-group">
@@ -84,4 +92,3 @@
         </div>
     </div>
 </div>
-

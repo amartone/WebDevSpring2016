@@ -17,12 +17,15 @@
 
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
-                        Issues
+                        Creator
                     </th>
-
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
-                        Creator
+                        Users
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Created At
                     </th>
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
@@ -33,13 +36,16 @@
                 <tbody>
                 <tr>
                     <td>
-                        <input ng-model="model.room.name" type="text" class="form-control" placeholder="Issue Name">
+                        <input ng-model="model.room.title" type="text" class="form-control" placeholder="Issue Name">
                     </td>
                     <td>
-                        <input ng-model="model.room.issues" type="text" class="form-control" placeholder="Priority">
+                        <input ng-model="model.room.userId" type="text" class="form-control" placeholder="Priority">
                     </td>
                     <td>
-                        <input ng-model="model.room.creator" type="text" class="form-control" placeholder="Description">
+                        <input ng-model="model.room.users" type="text" class="form-control" placeholder="Description">
+                    </td>
+                    <td>
+                        <input ng-model="model.room.createdAt" type="text" class="form-control" placeholder="Description">
                     </td>
                     <td class="action">
                         <div class="btn-group">
@@ -50,9 +56,10 @@
                 </tr>
 
                 <tr ng-repeat="i in model.rooms">
-                    <td>{{i.name}}</td>
-                    <td>{{i.issues}}</td>
-                    <td>{{i.creator}}</td>
+                    <td>{{i.title}}</td>
+                    <td>{{i.userId}}</td>
+                    <td>{{i.users}}</td>
+                    <td>{{i.createdAt}}</td>
                     <td>
                         <div class="btn-group">
                         <button ng-click="model.deleteRoom($index)" class="btn btn-danger"><span class="glyphicon glyphicon-glyphicon glyphicon-remove"></span></button>
@@ -66,4 +73,3 @@
         </div>
     </div>
 </div>
-

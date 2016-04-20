@@ -71,7 +71,7 @@ roomModel.updateRoomIssuesById(roomId, issueId)
     function deleteRoom(req, res) {
         var roomId = req.params.roomId;
 
-        roomId = roomModel.deleteIssue(issueId)
+        roomId = roomModel.deleteRoom(roomId)
                     .then(
                         function ( doc ) {
                             res.json(doc);
@@ -102,6 +102,8 @@ roomModel.updateRoomIssuesById(roomId, issueId)
     function updateRoom(req, res) {
         var roomId = req.params.roomId;
         var room = req.body;
+console.log("Here")
+
         room = roomModel.updateRoom(roomId, room)
                     .then(
                         function ( doc ) {

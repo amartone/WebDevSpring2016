@@ -74,12 +74,17 @@ module.exports = function (uuid, db, mongoose) {
 }
 
     function deleteUser(userId) {
-        for (var u in mock) {
-            if (mock[u]._id == userId) {
-                mock.splice(u, 1);
-                return true;
-            }
-        }
+      var deferred = q.defer();
+
+      UserModel.remove({_id: userId}, function (err, doc) {
+          if (err) {
+              deferred.reject(err);
+          } else {
+              deferred.resolve(doc);
+          }
+      });
+      return deferred.promise;
+
     }
 
     function findAllUsers() {

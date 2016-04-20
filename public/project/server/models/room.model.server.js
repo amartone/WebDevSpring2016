@@ -82,7 +82,7 @@ function updateRoomIssuesById(roomId, issueId){
     function updateRoom(roomId, room) {
       var deferred = q.defer();
 
-      RoomModel.findByIdAndUpdate(roomId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
+      RoomModel.findByIdAndUpdate(roomId, {$set: room}, {new:true, upsert:true}, function (err, doc) {
                   if (err) {
                         deferred.reject(err);
                   } else {

@@ -11,10 +11,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>
-                        <span class="glyphicon glyphicon-triangle-bottom"></span>
-                        ID
-                    </th>
+
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
                         First Name
@@ -30,7 +27,16 @@
                     </th>
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Registered On
+                    </th>
+                    
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
                         Roles
+                    </th>
+                    <th>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        Photo
                     </th>
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
@@ -41,9 +47,6 @@
                 <tbody>
                 <tr>
                     <td>
-                        <input ng-model="model.user._id" type="text" class="form-control" placeholder="ID">
-                    </td>
-                    <td>
                         <input ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name">
                     </td>
                     <td>
@@ -53,7 +56,13 @@
                         <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username">
                     </td>
                     <td>
+                        <input ng-model="model.user.registeredOn" type="text" class="form-control" placeholder="Username">
+                    </td>
+                    <td>
                         <input ng-model="model.user.role" type="text" class="form-control" placeholder="Roles">
+                    </td>
+                    <td>
+                        <input ng-model="model.user.photo" type="text" class="form-control" placeholder="Roles">
                     </td>
                     <td class="action">
                         <div class="btn-group">
@@ -64,11 +73,13 @@
                 </tr>
 
                 <tr ng-repeat="i in model.users">
-                    <td>{{i._id}}</td>
                     <td>{{i.firstName}}</td>
                     <td>{{i.lastName}}</td>
                     <td>{{i.username}}</td>
+                    <td>{{i.registeredOn}}</td>
                     <td>{{i.role}}</td>
+                    <td>{{i.photo}}</td>
+
                     <td>
                         <div class="btn-group">
                             <button ng-click="model.deleteUser($index)" class="btn btn-danger"><span class="glyphicon glyphicon-glyphicon glyphicon-remove"></span></button>
@@ -82,4 +93,3 @@
         </div>
     </div>
 </div>
-

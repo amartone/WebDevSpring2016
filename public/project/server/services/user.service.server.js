@@ -124,8 +124,16 @@ module.exports = function (app, userModel, multer) {
 
     function deleteUser(req, res) {
         var userId = req.params.id;
-        userModel.deleteUser(userId);
-        res.send(200);
+        userModel.deleteUser(userId)
+        .then(
+            function (doc) {
+                res.json(doc);
+            },
+            // send error if promise rejected
+            function ( err ) {
+                res.status(400).send(err);
+            }
+        );
     }
 
     function logout(req, res) {

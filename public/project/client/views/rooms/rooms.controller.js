@@ -89,7 +89,7 @@
                 .then(function (response) {
                     if (response.data) {
                         console.log(response.data);
-
+                        showRooms()
                     }
                 });
         }
