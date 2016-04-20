@@ -11,7 +11,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'active': $location.url()=='/register'}" ng-hide="currentUser || $location.url()=='/register'"><a href="#/register">Register</a></li>
+                <li ng-class="{'active': $location.url()=='/register'}" ng-hide="currentUser || $location.url()=='/register'"><a href="#/register">Sign Up</a></li>
                 <li ng-class="{'active': $location.url()=='/login'}" ng-hide="currentUser || $location.url()=='/login'"><a href="#/login">Login</a></li>
                 <li ng-class="{'active': $location.url()=='/profile'}" ng-show="currentUser"><a href="#/profile">{{currentUser.firstName}}</a></li>
                 <li ng-click="model.logout()" ng-show="currentUser"><a href="#/logout">Logout</a></li>
@@ -19,8 +19,8 @@
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search..." ng-model="keywords">
                 <button ng-click="model.search(keywords)" type="button"  class="btn btn-warning">Search</button>
-                <a href="#/createroom"> <button type="button"  class="btn btn-primary">Create Room</button></a>
-                <a href="#/createissue"> <button type="button"  class="btn btn-success">Create Issue</button></a>
+                <a ng-show="currentUser"> href="#/createroom"> <button type="button"  class="btn btn-primary">Create Room</button></a>
+                <a ng-show="currentUser"> href="#/createissue"> <button type="button"  class="btn btn-success">Create Issue</button></a>
             </form>
         </div>
     </div>

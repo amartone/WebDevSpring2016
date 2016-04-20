@@ -16,6 +16,12 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/welcome",{
+                templateUrl: "views/home/welcome.view.html",
+                resolve:{
+                    checkLoggedIn: checkWelcome
+                }
+            })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
                 controller: "RegisterController",
@@ -138,6 +144,25 @@
             return deferred.promise;
         }
 
+
+        function checkWelcome(UserService, $q, $location){
+        var deferred = $q.defer();
+
+        UserService.getCurrentUser()
+            .then(function(response) {
+                var currentUser = response.data;
+
+                if(currentUser) {
+                    deferred.reject();
+                } else {
+                    deferred.resolve();
+                    $location.url("/welcome");
+                }
+            });
+
+        return deferred.promise;
+    }
+
         function checkLoggedIn(UserService, $q, $location) {
 
             var deferred = $q.defer();
@@ -150,7 +175,7 @@
                         deferred.resolve();
                     } else {
                         deferred.reject();
-                        $location.url("/home");
+                        $location.url("/welcome");
                     }
                 });
 
