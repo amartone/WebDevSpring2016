@@ -17,7 +17,7 @@
 
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
-                        Creator
+                        Creator ID
                     </th>
                     <th>
                         <span class="glyphicon glyphicon-triangle-bottom"></span>
@@ -36,26 +36,26 @@
                 <tbody>
                 <tr>
                     <td>
-                        <input ng-model="model.room.title" type="text" class="form-control" placeholder="Issue Name">
+                        <input ng-model="model.adminRoom.title" type="text" class="form-control" placeholder="Issue Name">
                     </td>
                     <td>
-                        <input ng-model="model.room.userId" type="text" class="form-control" placeholder="Priority">
+                        <input ng-model="model.adminRoom.userId" type="text" class="form-control" placeholder="Priority">
                     </td>
                     <td>
-                        <input ng-model="model.room.users" type="text" class="form-control" placeholder="Description">
+                        <input ng-model="model.adminRoom.users" type="text" class="form-control" placeholder="Description">
                     </td>
                     <td>
-                        <input ng-model="model.room.createdAt" type="text" class="form-control" placeholder="Description">
+                        <input ng-model="model.adminRoom.createdAt" type="text" class="form-control" placeholder="Description">
                     </td>
                     <td class="action">
                         <div class="btn-group">
-                        <button ng-click="model.addRoom(model.room)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
-                        <button ng-click="model.updateRoom(model.room)" class="btn btn-success"><span class="glyphicon glyphicon-ok "></span></button>
+                        <button ng-click="model.addRoom(model.adminRoom)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button ng-click="model.updateRoom(model.adminRoom)" class="btn btn-success"><span class="glyphicon glyphicon-ok "></span></button>
                         </div>
                     </td>
                 </tr>
 
-                <tr ng-repeat="i in model.rooms">
+                <tr ng-repeat="i in model.allRooms">
                     <td>{{i.title}}</td>
                     <td>{{i.userId}}</td>
                     <td>{{i.users}}</td>

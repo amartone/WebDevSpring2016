@@ -89,7 +89,18 @@ module.exports = function (db, mongoose) {
 
 
     function findAllIssues() { //need to refactor
-        return mock;
+      var deferred = q.defer();
+
+      IssueModel.find({}, function(err, doc) {
+          if(err){
+            deferred.reject(err);
+          }
+          else{
+            deferred.resolve(doc);
+          }
+
+      });
+      return deferred.promise;
     }
 
     function findIssueById(issueId) {

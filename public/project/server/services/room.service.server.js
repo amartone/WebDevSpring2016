@@ -6,6 +6,20 @@ module.exports = function (app, roomModel) {
     app.put("/api/project/room/:roomId", updateRoom);
     app.get("/api/project/room/:userId/room/all", getRoomsUserBelongsTo);
     app.put("/api/project/room/:roomId/:issueId", updateRoomIssuesById);
+    app.get("/api/project/room/system/all", findAllRoomsInSystem);
+
+    function findAllRoomsInSystem(req, res){
+
+      var rooms = roomModel.findAllRooms()
+        .then(
+          function(doc){
+            res.json(doc)
+          },
+          function(err){
+            res.status(400).send(err);
+          }
+        );
+      }
 
 
 function updateRoomIssuesById(req, res){

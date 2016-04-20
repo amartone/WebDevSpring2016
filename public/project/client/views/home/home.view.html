@@ -1,4 +1,4 @@
-<div class="col-sm-offset-3 col-sm-9" ng-controller="HomeController">
+<div class="col-sm-offset-2 col-sm-9" ng-controller="HomeController">
     <h1>Roomr</h1>
     <div class="row">
         <div class="col-sm-6">
@@ -7,9 +7,9 @@
         </div>
     </div>
     <div class="col-sm-6">
-  <div class="row" ng-repeat="r in model.rooms">
+  <div class="row">
 
-      <div class="col-sm-6">
+      <div class="col-sm-6" ng-repeat="r in model.rooms">
           <div class="thumbnail">
               <div class="caption">
                   <div class="user" style="background-image:url('img/office.jpg')"></div>
@@ -24,8 +24,8 @@
 </div>
 
 <div class="col-sm-6">
-    <div class="row" ng-repeat="i in model.issues">
-        <div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12" ng-repeat="i in model.issues">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title pull-left"> {{i.title}}</h3>

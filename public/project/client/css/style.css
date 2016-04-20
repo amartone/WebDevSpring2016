@@ -17,7 +17,9 @@ p.users{
 
 }
 
-
+.caption h3{
+  word-wrap:break-word;
+}
 
 .user {
     display: inline-block;
@@ -43,6 +45,3 @@ p.users{
     width: 75%;
     padding-top: 8px;
 }
-
-
-

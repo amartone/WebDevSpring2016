@@ -6,7 +6,7 @@
         .module("ProjectIssuesApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, IssueService, $rootScope, $location, $routeParams) {
+    function ProfileController(UserService, IssueService, $rootScope, $location, $routeParams, RoomService) {
 
         var vm = this;
         vm.update = update;
@@ -27,6 +27,14 @@
                             vm.issues = response.data;
                         }
                     });
+
+                    RoomService.findRoomsUserBelongs(userId)
+                        .then(function(response){
+                            if(response.data) {
+                                console.log(response.data);
+                                vm.rooms = response.data;
+                            }
+                        });
 
                 UserService.findUserById(userId)
                     .then(function(response){

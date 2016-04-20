@@ -17,6 +17,7 @@
         vm.uploadPhoto = uploadPhoto;
         vm.findAllRoomsForUser = findAllRoomsForUser;
         vm.getUsersInSystem = getUsersInSystem;
+        vm.getAllIssuesInSystem = getAllIssuesInSystem;
 
         //The issue in the routeParams
         vm.issue = null;
@@ -24,6 +25,9 @@
         vm.issues = [];
         vm.issueId = null;
         vm.users = [];
+        vm.allIssuesInSystem = [];
+
+
 
         function getUsersInSystem(){
           UserService.findAllUsers()
@@ -53,13 +57,19 @@
         findAllRoomsForUser();
 
         function init() {
+
             if ($routeParams.issueId) {
                 issueId = $routeParams.issueId;
                 IssueService.findIssueById(issueId)
                     .then(function (response) {
                         if (response.data) {
                             vm.issue = response.data;
-
+                                UserService.findUserById(vm.issue.assignee)
+                                .then(function(response){
+                                  if(response){
+                                    vm.assigneeUsername = response.data.username;
+                                  }
+                                });
                         }
                     });
             }
@@ -69,18 +79,41 @@
                         if (response.data) {
                             vm.issues = response.data;
                         }
+
+
                     });
+
+                    
             }
+
         }
 
         init();
+
+
+        function getAllIssuesInSystem(){
+          IssueService.getAllIssues()
+          .then(function(response){
+            if(response.data){
+              console.log("Got all the issues" + response.data)
+              vm.allIssuesInSystem = response.data;
+            }
+
+          })
+}
+
+    getAllIssuesInSystem();
+
+
 
         function addIssue(issue) {
 
             IssueService.createIssueForUser($rootScope.currentUser._id, issue)
                 .then(function (response) {
                     if (response.data) {
+                        getAllIssuesInSystem();
                         vm.issues.push(response.data);
+                        vm.allIssuesInSystem.push(response.data);
                         console.log("Issue created:" + response.data)
                     }
                 });
@@ -98,6 +131,9 @@
                 .then(function (response) {
                     if (response.data) {
                         delete vm.issue;
+                        delete vm.adminIssue;
+                        getAllIssuesInSystem();
+
                     }
                 });
             //delete $scope.form;
@@ -116,15 +152,20 @@
         function selectIssue(issueIndex) {
             //Select the form
             vm.issue = vm.issues[issueIndex];
+            vm.adminIssue = vm.issues[issueIndex];
         }
 
         function deleteIssue(issueIndex) {
-            var issueId = vm.issues[issueIndex]._id;
+            var issueId = vm.allIssuesInSystem[issueIndex]._id;
             //Delete the selected form
             IssueService.deleteIssueById(issueId)
-                .then(init());
-        }
+                .then(function(response) {
 
+                  init();
+                  getAllIssuesInSystem();
+
+                });
+        }
 
         function uploadPhoto(image) {
             Upload.upload({

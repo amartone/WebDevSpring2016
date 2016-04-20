@@ -15,7 +15,8 @@
             updateRoomById: updateRoomById,
             findRoomById: findRoomById,
             findRoomsUserBelongs: findRoomsUserBelongs,
-            updateRoomIssuesById: updateRoomIssuesById
+            updateRoomIssuesById: updateRoomIssuesById,
+            findAllRoomsInSystem: findAllRoomsInSystem
         };
         return api;
 
@@ -45,6 +46,10 @@
 
         function findRoomById(roomId, room){
           return $http.get("/api/project/room/" + roomId, room);
+        }
+
+        function findAllRoomsInSystem(){
+          return $http.get("/api/project/room/system/all");
         }
     }
 })();

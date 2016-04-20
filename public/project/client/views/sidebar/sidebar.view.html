@@ -13,7 +13,7 @@
 
         <li ng-class="{'active': $location.url()=='/profile'}" ng-show="currentUser"><a href="#/profile/{{currentUser._id}}">Profile</a></li>
 
-        <li ng-class="{'active': $location.url()=='/issues' || $location.url()=='/users'}" ng-show="currentUser.role.indexOf('admin') >= 0"><a href="#/issues">Admin</a></li>
+        <li ng-class="{'active': $location.url()=='/issues' || $location.url()=='/users'}" ng-show="currentUser.role == 'Admin'"><a href="#/issues">Admin</a></li>
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->

@@ -20,8 +20,24 @@ module.exports = function (app, issueModel, multer, fs) {
     app.post("/api/project/user/:userId/issue/", createIssueForUser);
     app.put("/api/project/issue/:issueId", updateIssue);
     app.post("/api/project/photo/", upload.single('file'), uploadPhoto);
-    app.get("/api/project/user/photo", findPhoto);
+    app.get("/api/project/user/photo/", findPhoto);
     app.get("/api/project/issue/all/:roomId", getIssuesByRoomId);
+    app.get("/api/project/issue/system/all", getAllIssues);
+
+
+    function getAllIssues(req, res){
+      console.log("here");
+
+    var issues = issueModel.findAllIssues()
+      .then(
+        function(doc){
+          res.json(doc)
+        },
+        function(err){
+          res.status(400).send(err);
+        }
+      );
+}
 
     function getIssuesByRoomId(req, res){
 

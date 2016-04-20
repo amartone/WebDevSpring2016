@@ -23,6 +23,7 @@ module.exports = function (db, mongoose) {
         updateRoomIssuesById: updateRoomIssuesById,
         searchByKeywords: searchByKeywords
 
+
     };
     return api;
 
@@ -149,7 +150,18 @@ function updateRoomIssuesById(roomId, issueId){
     }
 
     function findAllRooms() { //need to refactor
-        return mock;
+      var deferred = q.defer();
+
+      RoomModel.find({}, function(err, doc) {
+          if(err){
+            deferred.reject(err);
+          }
+          else{
+            deferred.resolve(doc);
+          }
+
+      });
+      return deferred.promise;
     }
 
     function findRoomsByUserId(userId){

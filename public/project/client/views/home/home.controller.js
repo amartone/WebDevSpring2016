@@ -29,7 +29,7 @@
 
         function showRooms(){
 
-          RoomService.findAllRoomsForUser(vm.user)
+          RoomService.findRoomsUserBelongs(vm.user)
             .then(function(response){
 
               if(response.data){

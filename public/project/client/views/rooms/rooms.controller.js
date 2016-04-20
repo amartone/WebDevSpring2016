@@ -80,6 +80,15 @@
                         vm.rooms = response.data;
                     }
                 });
+
+                RoomService.findAllRoomsInSystem()
+                    .then(function (response) {
+                        if (response.data) {
+                            console.log(response.data);
+                            vm.allRooms = response.data;
+                        }
+                    });
+
         }
 
         showRooms();
@@ -100,6 +109,9 @@
                     if (response.data) {
                         console.log(response.data);
                         delete vm.room;
+                        delete vm.adminRoom;
+                        showRooms();
+                        init();
                     }
                 });
             //delete $scope.user;
@@ -107,11 +119,14 @@
 
         function selectRoom(roomIndex) {
             //Select the issue
+            console.log("selecting")
             vm.room = vm.rooms[roomIndex];
+            vm.adminRoom = vm.allRooms[roomIndex];
+
         }
 
         function deleteRoom(roomIndex) {
-            var roomId = vm.rooms[roomIndex]._id;
+            var roomId = vm.allRooms[roomIndex]._id;
             //Delete the selected issue
             console.log(roomId);
             RoomService.deleteRoomById(roomId)

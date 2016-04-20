@@ -13,7 +13,8 @@
             deleteIssueById: deleteIssueById,
             updateIssueById: updateIssueById,
             findIssueById: findIssueById,
-            getIssuesByRoomId: getIssuesByRoomId
+            getIssuesByRoomId: getIssuesByRoomId,
+            getAllIssues: getAllIssues
         };
         return api;
 
@@ -41,6 +42,10 @@
         function findIssueById(issueId){
             return $http.get("/api/project/issue/" + issueId);
 
+        }
+
+        function getAllIssues(){
+              return $http.get("/api/project/issue/system/all");
 
         }
 
