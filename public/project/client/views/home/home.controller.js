@@ -13,6 +13,7 @@
         vm.test = "Hi";
         vm.user = 0;
         vm.rooms = []
+
         function showIssues() {
             if($rootScope.currentUser){
                 vm.user = $rootScope.currentUser._id;
@@ -23,6 +24,15 @@
                         console.log(response.data);
                         vm.issues = response.data;
                     }
+                });
+
+                IssueService.getAllIssues()
+                .then(function(response){
+                  if(response.data){
+                    console.log("Got all the issues" + response.data)
+                    vm.issues = response.data;
+                  }
+
                 });
         }
         showIssues();

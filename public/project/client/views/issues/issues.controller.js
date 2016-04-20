@@ -83,7 +83,7 @@
 
                     });
 
-                    
+
             }
 
         }
@@ -99,7 +99,7 @@
               vm.allIssuesInSystem = response.data;
             }
 
-          })
+          });
 }
 
     getAllIssuesInSystem();
