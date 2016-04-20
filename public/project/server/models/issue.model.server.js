@@ -16,10 +16,29 @@ module.exports = function (db, mongoose) {
         findIssueByTitle: findIssueByTitle,
         findIssuesByUserId: findIssuesByUserId,
         getIssuesByRoomId: getIssuesByRoomId,
-        searchByKeywords: searchByKeywords
+        searchByKeywords: searchByKeywords,
+        findIssuesWhereAsignee: findIssuesWhereAsignee
 
     };
     return api;
+
+
+    function findIssuesWhereAsignee(userId){
+      var deferred = q.defer();
+
+      IssueModel.find({assignee: userId}, function(err, doc){
+        if (err) {
+            // reject promise if error
+            deferred.reject(err);
+        } else {
+            // resolve promise
+            deferred.resolve(doc);
+        }
+      });
+      // return a promise
+      return deferred.promise;
+      }
+
 
 
     function searchByKeywords(keywords) {
@@ -28,6 +47,9 @@ module.exports = function (db, mongoose) {
       //   title: "text",
       //   description: "text"
       // });
+
+      
+
 
       var deferred = q.defer();
 

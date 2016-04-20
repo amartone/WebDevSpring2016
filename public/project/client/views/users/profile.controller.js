@@ -28,6 +28,15 @@
                         }
                     });
 
+                IssueService.findIssuesWhereAsignee(userId)
+                .then(function(response){
+                    if(response.data) {
+                        console.log("Assigned:" + response.data);
+                        vm.issuesAssigned = response.data;
+                    }
+                });
+
+
                     RoomService.findRoomsUserBelongs(userId)
                         .then(function(response){
                             if(response.data) {

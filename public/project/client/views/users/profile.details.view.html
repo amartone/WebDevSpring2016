@@ -15,12 +15,17 @@
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                <div class="hidden-xs">Rooms</div>
+                <div class="hidden-xs">All Rooms</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-                <div class="hidden-xs">Issues</div>
+            <button type="button" id="issuesCreated" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                <div class="hidden-xs">Issues Created</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="favorites" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                <div class="hidden-xs">Issues Assigned</div>
             </button>
         </div>
 
@@ -29,7 +34,7 @@
     <div class="well">
         <div class="tab-content">
             <div class="tab-pane fade in active" id="tab1">
-                <h3>Rooms</h3>
+                <h3>ALl Rooms</h3>
                 <div class="list-group">
                     <a href="#/roomdetails/{{r._id}}" ng-repeat="r in model.rooms" class="list-group-item">{{r.title}}</a>
                 </div>
@@ -37,7 +42,13 @@
             <div class="tab-pane fade in" id="tab2">
                 <h3>Issues Created</h3>
                 <div class="list-group">
-                    <a href="#/issuedetails/{{i._id}}" ng-repeat="i in model.issues" class="list-group-item">{{i.title}}</a>
+                    <a href="#/roomdetails/{{r._id}}" ng-repeat="r in model.issues" class="list-group-item">{{r.title}}</a>
+                </div>
+            </div>
+            <div class="tab-pane fade in" id="tab3">
+                <h3>Issues Assigned</h3>
+                <div class="list-group">
+                    <a href="#/issuedetails/{{i._id}}" ng-repeat="i in model.issuesAssigned" class="list-group-item">{{i.title}}</a>
                 </div>
             </div>
         </div>

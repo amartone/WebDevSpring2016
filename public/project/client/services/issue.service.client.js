@@ -14,7 +14,8 @@
             updateIssueById: updateIssueById,
             findIssueById: findIssueById,
             getIssuesByRoomId: getIssuesByRoomId,
-            getAllIssues: getAllIssues
+            getAllIssues: getAllIssues,
+            findIssuesWhereAsignee: findIssuesWhereAsignee
         };
         return api;
 
@@ -46,7 +47,9 @@
 
         function getAllIssues(){
               return $http.get("/api/project/issue/system/all");
-
+        }
+        function findIssuesWhereAsignee(userId){
+          return $http.get("/api/project/issue/assignee/" + userId);
         }
 
     }

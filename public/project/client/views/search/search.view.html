@@ -6,8 +6,8 @@
     <h1 class="panel-title">Issues</h1>
   </div>
 
-  <div class="panel-body">
-    <a ng-repeat="s in model.issueResults" href="#/issuedetails/{{s._id}}">{{s.title}}</a>
+  <div ng-repeat="s in model.issueResults"class="panel-body">
+    <a href="#/issuedetails/{{s._id}}">{{s.title}}</a>
       </div>
 </div>
 
@@ -16,8 +16,8 @@
   <h1 class="panel-title">Rooms</h1>
 </div>
 
-<div class="panel-body">
-  <a ng-repeat="r in model.roomResults" href="#/roomdetails/{{r._id}}">{{r.title}}</a>
+<div ng-repeat="r in model.roomResults"class="panel-body">
+  <a href="#/roomdetails/{{r._id}}">{{r.title}}</a>
     </div>
 </div>
 
@@ -27,8 +27,8 @@
   <h1 class="panel-title">Users</h1>
 </div>
 
-<div class="panel-body">
-  <a ng-repeat="u in model.userResults" href="#/profile/{{u._id}}">{{u.username}}</a>
+<div ng-repeat="u in model.userResults" class="panel-body">
+  <a href="#/profile/{{u._id}}">{{u.username}}</a>
     </div>
 </div>
 

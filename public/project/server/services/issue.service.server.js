@@ -23,6 +23,23 @@ module.exports = function (app, issueModel, multer, fs) {
     app.get("/api/project/user/photo/", findPhoto);
     app.get("/api/project/issue/all/:roomId", getIssuesByRoomId);
     app.get("/api/project/issue/system/all", getAllIssues);
+    app.get("/api/project/issue/assignee/:userId", findIssuesWhereAsignee);
+
+function findIssuesWhereAsignee(req, res){
+  console.log("heresdfdsafsdfds")
+  var userId = req.params.userId;
+      issueModel.findIssuesWhereAsignee(userId)
+      .then(
+      function(doc){
+        res.json(doc)
+      },
+      function(err){
+        res.status(400).send(err);
+      }
+      );
+
+}
+
 
 
     function getAllIssues(req, res){
