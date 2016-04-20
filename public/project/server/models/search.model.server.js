@@ -1,4 +1,6 @@
-module.exports = function (uuid, issueModel, userModel) {
+
+var q = require("q");
+module.exports = function (uuid, issueModel, userModel, db, mongoose) {
 
     var api = {
         searchByKeywords: searchByKeywords
@@ -7,22 +9,24 @@ module.exports = function (uuid, issueModel, userModel) {
 
     function searchByKeywords(keywords) {
 
-        //Break up the keywords into list of keywords
-        var issueResults = [];
+      // issueModel.createIndex({
+      //   title: "text",
+      //   description: "text"
+      // });
 
-        //Search each domain object for each keyword. If match found, return result.
+      var deferred = q.defer();
 
-            var issueResultId = issueModel.findIssueById(keywords);
-            var issueResultTitle = issueModel.findIssueByTitle(keywords);
-            if (issueResultId) {
-                issueResults.push(issueResultId);
-            }
-            if(issueResultTitle){
-                issueResults.push(issueResultTitle);
-            }
-
-        return issueResults;
-    }
-
+      issueModel.find({$text: {$search: keywords}}, function(err, doc){
+          if (err) {
+              // reject promise if error
+              deferred.reject(err);
+          } else {
+              // resolve promise
+              deferred.resolve(doc);
+          }
+      });
+       // return a promise
+       return deferred.promise;
+}
 
     };

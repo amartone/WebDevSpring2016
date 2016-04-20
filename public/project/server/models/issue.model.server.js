@@ -15,10 +15,34 @@ module.exports = function (db, mongoose) {
         deleteIssue: deleteIssue,
         findIssueByTitle: findIssueByTitle,
         findIssuesByUserId: findIssuesByUserId,
-        getIssuesByRoomId: getIssuesByRoomId
+        getIssuesByRoomId: getIssuesByRoomId,
+        searchByKeywords: searchByKeywords
 
     };
     return api;
+
+
+    function searchByKeywords(keywords) {
+
+      // issueModel.createIndex({
+      //   title: "text",
+      //   description: "text"
+      // });
+
+      var deferred = q.defer();
+
+      IssueModel.find({$text: {$search: keywords}}, function(err, doc){
+          if (err) {
+              // reject promise if error
+              deferred.reject(err);
+          } else {
+              // resolve promise
+              deferred.resolve(doc);
+          }
+      });
+       // return a promise
+       return deferred.promise;
+}
 
     function getIssuesByRoomId(roomId){
 

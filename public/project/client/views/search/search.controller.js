@@ -15,14 +15,29 @@
         vm.keywords = $location.search().keyword.toString();
 
 
+        vm.issueResults = null;
+        vm.roomResults = null;
+        vm.userResults = null;
+
         function searchByKeywords(keywords){
-            SearchService.search(keywords)
+            SearchService.searchByKeywordsInIssues(keywords)
                 .then(function(response){
                     if(response.data) {
-                        console.log(response.data);
-                        vm.searchResults = response.data;
+                        vm.issueResults = response.data;
                     }
                 });
+            SearchService.searchByKeywordsInRooms(keywords)
+                    .then(function(response){
+                        if(response.data) {
+                            vm.roomResults = response.data;
+                        }
+                    });
+            SearchService.searchByKeywordsInUsers(keywords)
+                        .then(function(response){
+                            if(response.data) {
+                                vm.userResults = response.data;
+                            }
+                        });
         }
 
         searchByKeywords(vm.keywords);

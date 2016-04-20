@@ -42,7 +42,6 @@
         function logout() {
             $rootScope.currentUser = null;
             return $http.post("/api/project/logout");
-
         }
 
         function setCurrentUser(user) {

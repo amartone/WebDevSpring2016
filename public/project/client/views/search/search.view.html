@@ -1,7 +1,15 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 main" ng-controller="SearchController">
 
-    <div ng-repeat="s in model.searchResults">
+    <div ng-repeat="s in model.issueResults">
     <a href="#/issuedetails/{{s._id}}"><h1>{{s.title}}</h1></a>
         </div>
+
+        <div ng-repeat="r in model.roomResults">
+        <a href="#/roomdetails/{{r._id}}"><h1>{{r.title}}</h1></a>
+            </div>
+
+            <div ng-repeat="u in model.userResults">
+            <a href="#/profile/{{u._id}}"><h1>{{u.username}}</h1></a>
+                </div>
 
 </div>

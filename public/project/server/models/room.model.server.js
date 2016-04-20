@@ -20,9 +20,38 @@ module.exports = function (db, mongoose) {
         deleteRoom: deleteRoom,
         findRoomsByUserId: findRoomsByUserId,
         findRoomsUserBelongs: findRoomsUserBelongs,
-        updateRoomIssuesById: updateRoomIssuesById
+        updateRoomIssuesById: updateRoomIssuesById,
+        searchByKeywords: searchByKeywords
+
     };
     return api;
+
+
+    function searchByKeywords(keywords) {
+      console.log("Here????")
+      // issueModel.createIndex({
+      //   title: "text",
+      //   description: "text"
+      // });
+
+      var deferred = q.defer();
+
+      RoomModel.find({$text: {$search: keywords}}, function(err, doc){
+          if (err) {
+              // reject promise if error
+              deferred.reject(err);
+              console.log("Room search error:" + err)
+
+          } else {
+              // resolve promise
+              deferred.resolve(doc);
+              console.log("Room search results:" + doc)
+          }
+      });
+       // return a promise
+       return deferred.promise;
+    }
+
 
 function updateRoomIssuesById(roomId, issueId){
   var deferred = q.defer();

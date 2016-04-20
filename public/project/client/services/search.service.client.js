@@ -5,12 +5,20 @@
 
     function searchService($http) {
         var api = {
-            search: search
+            searchByKeywordsInIssues: searchByKeywordsInIssues,
+            searchByKeywordsInRooms: searchByKeywordsInRooms,
+            searchByKeywordsInUsers: searchByKeywordsInUsers
         };
         return api;
 
-        function search(keywords) {
-            return $http.get("/api/project/search?keywords=" + keywords);
+        function searchByKeywordsInIssues(keywords) {
+            return $http.get("/api/project/search/issues?keywords=" + keywords);
+        }
+        function searchByKeywordsInRooms(keywords) {
+            return $http.get("/api/project/search/rooms?keywords=" + keywords);
+        }
+        function searchByKeywordsInUsers(keywords) {
+            return $http.get("/api/project/search/users?keywords=" + keywords);
         }
     }
 

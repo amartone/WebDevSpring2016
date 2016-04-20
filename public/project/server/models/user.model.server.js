@@ -19,9 +19,33 @@ module.exports = function (uuid, db, mongoose) {
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        searchByKeywords: searchByKeywords
+
     };
     return api;
+
+    function searchByKeywords(keywords) {
+
+      // issueModel.createIndex({
+      //   title: "text",
+      //   description: "text"
+      // });
+
+      var deferred = q.defer();
+
+      UserModel.find({$text: {$search: keywords}}, function(err, doc){
+          if (err) {
+              // reject promise if error
+              deferred.reject(err);
+          } else {
+              // resolve promise
+              deferred.resolve(doc);
+          }
+      });
+       // return a promise
+       return deferred.promise;
+    }
 
     function createUser(user) {
         user.photo = "./img/linkedin.jpg";
