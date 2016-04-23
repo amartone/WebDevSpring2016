@@ -37,7 +37,8 @@
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
-                controller: "FormFieldsController",
+                controller: "AdminController",
+                controllerAs: "model",
                 resolve: {
                     loggedIn: checkAdmin
                 }
@@ -152,7 +153,7 @@
     {
         var deferred = $q.defer();
 
-        $http.get('/api/loggedin').success(function(user)
+        $http.get('/api/assignment/loggedIn').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated

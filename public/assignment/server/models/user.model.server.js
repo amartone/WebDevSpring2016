@@ -82,16 +82,38 @@ module.exports = function (db, mongoose) {
     }
 
     function deleteUser(userId) {
-        for (var u in mock) {
-            if (mock[u]._id === userId) {
-                mock.splice(userId, 1);
-            }
-        }
+        console.log("deleting user")
+         var deferred = q.defer();
+
+        return UserModel.remove({_id: userId});
     }
 
     function findAllUsers() {
-        return mock;
+        console.log("here3")
+        var deferred = q.defer();
+
+        // find one retrieves one document
+        UserModel.find({},
+
+            // first argument is predicate
+
+
+            // doc is unique instance matches predicate
+            function(err, doc) {
+
+                if (err) {
+                    // reject promise if error
+                    deferred.reject(err);
+                } else {
+                    // resolve promise
+                    deferred.resolve(doc);
+                }
+
+            });
+
+        return deferred.promise;
     }
+
 
     function findUserByUsername(username) {
       var deferred = q.defer();

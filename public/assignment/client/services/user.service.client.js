@@ -15,13 +15,28 @@
             updateUser: updateUser,
             getLoggedIn: getLoggedIn,
             findUserById: findUserById,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            findAllUsers: findAllUsers,
+            deleteUser: deleteUser,
+            adminCreateUser: adminCreateUser
+
         };
 
         return api;
 
+        function adminCreateUser(user){
+            return $http.post("/api/assignment/user", user)
+        }
+        function deleteUser(userId){
+
+            return $http.delete("/api/assignment/user/" + userId)
+        }
         function getCurrentUser(){
             return $http.get("/api/assignment/loggedIn");
+        }
+
+        function findAllUsers(){
+            return $http.get("/api/assignment/user/")
         }
 
         function updateUser(userId, user){
