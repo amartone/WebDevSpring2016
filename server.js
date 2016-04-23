@@ -44,8 +44,8 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 //require("./public/experiments/project/omdb/server/app.js")(app);
-require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
-// require("./public/project/server/app.js")(app, uuid, db, mongoose, multer, fs);
+//require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
+require("./public/project/server/app.js")(app, uuid, db, mongoose, multer, fs);
 
 //require("./public/experiments/hombach/server/app.js")(app);
 
