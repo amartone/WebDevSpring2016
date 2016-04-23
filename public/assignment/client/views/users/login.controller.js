@@ -11,22 +11,19 @@
 
     function LoginController(UserService, $location) {
         var vm = this;
-        vm.findUserByCredentials = findUserByCredentials;
+        vm.login = login;
 
         function init() {
         }
 
         init();
 
-        function findUserByCredentials(user, pass) {
+        function login(user) {
             if (!user) {
                 return;
             }
             UserService
-                .findUserByCredentials(
-                    user,
-                    pass
-                )
+                .login(user)
                 .then(function (response) {
                     if (response.data) {
                         UserService.setCurrentUser(response.data);

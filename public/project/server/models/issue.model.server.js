@@ -48,7 +48,7 @@ module.exports = function (db, mongoose) {
       //   description: "text"
       // });
 
-      
+
 
 
       var deferred = q.defer();

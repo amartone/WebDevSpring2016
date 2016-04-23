@@ -10,7 +10,10 @@
         $routeProvider
             .when("/home",{
                 templateUrl: "views/home/home.view.html",
-                controller: "HomeController"
+                controller: "HomeController",
+                resolve: {
+                  loggedIn: checkCurrentUser
+                }
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
@@ -28,7 +31,7 @@
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve:{
-                    checkLoggedIn: checkLoggedIn
+                    loggedIn: checkLoggedIn
                 }
 
             })
@@ -81,24 +84,69 @@
         return deferred.promise;
     }
 
-    function checkLoggedIn(UserService, $q, $location) {
+    // function checkLoggedIn(UserService, $q, $location) {
+    //
+    //     var deferred = $q.defer();
+    //
+    //     UserService.getCurrentUser()
+    //         .then(function(response) {
+    //             var currentUser = response.data;
+    //
+    //             if(currentUser) {
+    //                 UserService.setCurrentUser(currentUser);
+    //                 deferred.resolve();
+    //             } else {
+    //                 deferred.reject();
+    //                 $location.url("/home");
+    //             }
+    //         });
+    //
+    //     return deferred.promise;
+    // }
 
+
+  var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope)
+  {
+      var deferred = $q.defer();
+
+      $http.get('/api/assignment/loggedIn').success(function(user)
+      {
+          $rootScope.errorMessage = null;
+          // User is Authenticated
+          if (user !== '0')
+          {
+              $rootScope.currentUser = user;
+              deferred.resolve();
+          }
+          // User is Not Authenticated
+          else
+          {
+              $rootScope.errorMessage = 'You need to log in.';
+              deferred.reject();
+              $location.url('/login');
+          }
+      });
+
+      return deferred.promise;
+  };
+
+  var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService.getCurrentUser()
-            .then(function(response) {
-                var currentUser = response.data;
-
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    $location.url("/home");
-                }
-            });
+        $http.get('/api/assignment/loggedIn').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
+            }
+            deferred.resolve();
+        });
 
         return deferred.promise;
-    }
+    };
+
 
 })();

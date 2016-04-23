@@ -94,23 +94,39 @@ module.exports = function (db, mongoose) {
     }
 
     function findUserByUsername(username) {
-        for (u in mock) {
-            if (mock[u].username === username) {
-                return mock[u];
-            }
-        }
-        return null;
-    }
+      var deferred = q.defer();
 
-    function findUserByCredentials(username, password) {
+      // find one retrieves one document
+      UserModel.findOne(
+
+          // first argument is predicate
+          { username: username},
+
+          // doc is unique instance matches predicate
+          function(err, doc) {
+
+              if (err) {
+                  // reject promise if error
+                  deferred.reject(err);
+              } else {
+                  // resolve promise
+                  deferred.resolve(doc);
+              }
+
+          });
+
+      return deferred.promise;
+  }
+
+    function findUserByCredentials(credentials) {
         var deferred = q.defer();
 
         // find one retrieves one document
         UserModel.findOne(
 
             // first argument is predicate
-            { username: username,
-                password: password },
+            { username: credentials.username,
+                password: credentials.password },
 
             // doc is unique instance matches predicate
             function(err, doc) {

@@ -8,7 +8,7 @@
 
     function userService($http, $rootScope) {
         var api = {
-            findUserByCredentials: findUserByCredentials,
+            login: login,
             setCurrentUser: setCurrentUser,
             register: register,
             logout: logout,
@@ -21,7 +21,7 @@
         return api;
 
         function getCurrentUser(){
-            return $http.get("/api/assignment/loggedin");
+            return $http.get("/api/assignment/loggedIn");
         }
 
         function updateUser(userId, user){
@@ -29,11 +29,11 @@
         }
 
         function register(user) {
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/register", user);
         }
 
         function logout() {
-            $rootScope.currentUser = null;
+          return $http.post("/api/assignment/logout");
         }
 
         function setCurrentUser(user) {
@@ -41,8 +41,8 @@
             $rootScope.currentUser = user;
         }
 
-        function findUserByCredentials(username, password) {
-            return $http.get("/api/assignment/user?username=" + username + "&password=" + password);
+        function login(user) {
+            return $http.post("/api/assignment/login", user);
         }
 
         function getLoggedIn(){
