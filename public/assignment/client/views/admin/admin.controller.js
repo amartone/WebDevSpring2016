@@ -16,6 +16,13 @@
         vm.updateUser = update;
         vm.addUser    = add;
         vm.selectUser = select;
+        vm.predicate = 'username';
+        vm.reverse = true;
+        vm.order = function(predicate) {
+            vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+            vm.predicate = predicate;
+        };
+
 
         function init() {
             UserService
