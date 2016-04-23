@@ -90,10 +90,9 @@ module.exports = function (app, formModel, userModel) {
             );
     }
     function register(req, res) {
-      console.log("here2")
         var newUser = req.body;
         // user = userModel.createUser(user)
-
+        newUser.roles = ['admin']
         userModel
            .findUserByUsername(newUser.username)
            .then(

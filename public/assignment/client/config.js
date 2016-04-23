@@ -39,7 +39,7 @@
                 templateUrl: "views/admin/admin.view.html",
                 controller: "FormFieldsController",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    loggedIn: checkAdmin
                 }
             })
             .when("/forms", {
@@ -143,6 +143,24 @@
                 $rootScope.currentUser = user;
             }
             deferred.resolve();
+        });
+
+        return deferred.promise;
+    };
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
         });
 
         return deferred.promise;

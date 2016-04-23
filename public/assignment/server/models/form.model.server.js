@@ -32,7 +32,7 @@ module.exports = function (db, mongoose) {
     return api;
 
 
-    function createFormForUser(issue, userId) {
+    function createFormForUser(form, userId) {
         var deferred = q.defer();
 
         newForm = {
@@ -64,7 +64,7 @@ module.exports = function (db, mongoose) {
     function findFormById(issueId) {
         var deferred = q.defer();
 
-        IssueModel.findById(issueId, function(err, doc) {
+        FormModel.findById(issueId, function(err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -80,7 +80,7 @@ module.exports = function (db, mongoose) {
         issue.updated = (new Date()).getTime();
 
 
-        IssueModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
+        FormModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
