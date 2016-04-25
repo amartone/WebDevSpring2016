@@ -41,12 +41,7 @@
         {
             UserService
                 .deleteUser(user._id)
-                .then(function(response){
-                    if(response){
-                        init();
-                    }
-
-                });
+                .then(init());
         }
 
         function update(user)
