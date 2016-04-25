@@ -44,7 +44,7 @@ module.exports = function (db, mongoose) {
 
     function updateUser(userId, user) {
         var deferred = q.defer();
-
+        delete user._id;
         //user =  {username: user.username,
         //    password: user.password,
         //    firstName: user.firstName,
