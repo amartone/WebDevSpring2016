@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController(FieldService, FormService, $routeParams, $scope) {
+    function FieldController(FieldService, $route, FormService, $routeParams, $scope) {
         var vm = this;
         var formId = null;
         vm.edit_field = null;
@@ -66,7 +66,12 @@
         function deleteField(field) {
             FieldService
                 .deleteFieldFromForm(formId, field._id)
-                .then(init);
+                .then(function(response){
+                  $route.reload();
+                  console.log("reloading...")
+                  init();
+
+                });
         }
 
         function addField(fieldType) {
