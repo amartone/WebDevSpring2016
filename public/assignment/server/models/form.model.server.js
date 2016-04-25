@@ -78,7 +78,7 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer();
 
         issue.updated = (new Date()).getTime();
-
+        delete issue._id;
 
         FormModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
             if (err) {

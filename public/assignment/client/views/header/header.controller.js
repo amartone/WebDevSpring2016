@@ -10,7 +10,7 @@
         var vm = this;
         vm.logout = logout;
 
-
+      
         function logout() {
             UserService.logout()
             .then(function(response){

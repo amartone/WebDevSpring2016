@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, $rootScope, $location) {
+    function ProfileController(UserService, $route, $rootScope, $location) {
 
         var vm = this;
         vm.update = update;
@@ -39,6 +39,7 @@
                     if(currentUser){
                         console.log(currentUser);
                         UserService.setCurrentUser(currentUser);
+                        $route.reload();
                         $location.url("/profile");
                     }
                 });
