@@ -70,6 +70,8 @@ module.exports = function (uuid, db, mongoose) {
     function updateUser(userId, user) {
 
         var deferred = q.defer();
+
+        delete user._id;
         UserModel.findByIdAndUpdate(userId, user, {new:true}, function(err, doc){
             if (err) {
                 // reject promise if error

@@ -143,8 +143,9 @@ module.exports = function (db, mongoose) {
 
     issue.updated = (new Date()).getTime();
     //issue.image = issue.image.replace("./" , "");
+    delete issue._id;
 
-    IssueModel.findByIdAndUpdate(issueId, {$set: issue}, {new:true, upsert:true}, function (err, doc) {
+    IssueModel.findByIdAndUpdate(issueId, issue, {new:true}, function (err, doc) {
                 if (err) {
                       deferred.reject(err);
                 } else {

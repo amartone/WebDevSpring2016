@@ -53,7 +53,7 @@ module.exports = function (db, mongoose) {
        return deferred.promise;
     }
 
-
+//deprecated function
 function updateRoomIssuesById(roomId, issueId){
   var deferred = q.defer();
 
@@ -112,7 +112,9 @@ function updateRoomIssuesById(roomId, issueId){
     function updateRoom(roomId, room) {
       var deferred = q.defer();
 
-      RoomModel.findByIdAndUpdate(roomId, {$set: room}, {new:true, upsert:true}, function (err, doc) {
+      delete room._id;
+
+      RoomModel.findByIdAndUpdate(roomId, room, {new:true}, function (err, doc) {
                   if (err) {
                         deferred.reject(err);
                   } else {
