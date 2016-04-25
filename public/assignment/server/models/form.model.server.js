@@ -74,17 +74,17 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function updateForm(issueId, issue) {
+    function updateForm(formId, form) {
         var deferred = q.defer();
 
-        issue.updated = (new Date()).getTime();
-        delete issue._id;
+        form.updated = (new Date()).getTime();
+        delete form._id;
 
-        FormModel.findByIdAndUpdate(issueId, issue, {new:true, upsert:true}, function (err, doc) {
+        FormModel.findByIdAndUpdate(formId, form, {new:true}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
-                console.log("Issue updated in model: " + doc);
+                console.log("Form updated in model: " + doc);
                 deferred.resolve(doc);
             }
         });
