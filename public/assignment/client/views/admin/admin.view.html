@@ -4,26 +4,23 @@
             <h1>Admin</h1>
             <hr>
             <h3>Users</h3>
-            <pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>
-
             <table class="table table-striped table-responsive">
                 <thead>
                 <tr>
                     <th>
-
-                        <button ng-click="order('username')">Username</button>
-                            <span ng-show="predicate = 'username'" ng-class="{reverse:reverse}"></span>
+                        <a ng-click="order('username')">Username</a>
+                        <span class="glyphicon glyphicon-triangle-bottom" ng-show="predicate = 'username'" ng-class="{reverse:reverse}"></span>
                     </th>
                     <th>
                         Password
                     </th>
                     <th>
-                        <button ng-click="order('username')">First Name</button>
-                        <span ng-show="predicate = 'username'" ng-class="{reverse:reverse}"></span>
+                        <a ng-click="order('username')">First Name</a>
+                        <span class="glyphicon glyphicon-triangle-bottom" ng-show="predicate = 'username'" ng-class="{reverse:reverse}"></span>
                     </th>
                     <th>
-                        <button ng-click="order('username')">Last Name</button>
-                        <span ng-show="predicate = 'username'" ng-class="{reverse:reverse}"></span>
+                        <a ng-click="order('username')">Last Name</a>
+                        <span class="glyphicon glyphicon-triangle-bottom" ng-show="predicate = 'username'" ng-class="{reverse:reverse}"></span>
                     </th>
                     <th>
                         Role
