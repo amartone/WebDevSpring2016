@@ -37,6 +37,7 @@ module.exports = function (app, issueModel, roomModel, userModel) {
 
       function searchByKeywordsInUsers(req, res) {
           var keywords = req.query.keywords;
+          console.log("Searching users from service")
 
           userModel.searchByKeywords(keywords)
                      .then(
