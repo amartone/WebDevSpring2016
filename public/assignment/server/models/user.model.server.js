@@ -53,7 +53,7 @@ module.exports = function (db, mongoose) {
 
         //Note: need to use $set if MongoDB = 2.4.x
 
-        UserModel.findByIdAndUpdate(userId, ($set: {user}}, {new:true}, function(err, doc){
+        UserModel.findByIdAndUpdate(userId, {$set: user}, {new:true}, function(err, doc){
             if (err) {
                 // reject promise if error
                 deferred.reject(err);
